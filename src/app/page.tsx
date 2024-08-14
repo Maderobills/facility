@@ -29,7 +29,7 @@ const Home: React.FC = () => {
           <div className={sidebarStyle.top}>
             <div className={sidebarStyle.adminUser}>
               <i className="fi fi-sr-user-pen"></i>
-              <span>Administrator</span>
+              <span>Shekinah</span>
             </div>
             <div>
               <i className="fi fi-br-arrow-small-left"></i>
@@ -121,10 +121,12 @@ const Home: React.FC = () => {
             </li>
           </ul>
           <hr />
+          <div className={mainStyle.spaceXsm}></div>
           <div className={sidebarStyle.out}>
             <i className="fi fi-tr-sign-out-alt"></i>
             <span>Logout</span>
           </div>
+          <div className={mainStyle.spaceXsm}></div>
         </div>
       </div>
       <main>
@@ -138,9 +140,9 @@ const Home: React.FC = () => {
             <h1>Dashboard</h1>
           </section>
           <section
-            id="projects"
+            id="space"
             style={{
-              display: visibleSection === "projects" ? "block" : "none",
+              display: visibleSection === "space" ? "block" : "none",
             }}
           >
             <h1>Space Layout</h1>
