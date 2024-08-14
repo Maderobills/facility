@@ -35,6 +35,7 @@ const Home: React.FC = () => {
               <i className="fi fi-br-arrow-small-left"></i>
             </div>
           </div>
+          <div className={mainStyle.spaceXsm}></div>
           <div className={sidebarStyle.group}>
             <div className={sidebarStyle.icon}>
               <i className="fi fi-tr-user-shield"></i>
@@ -47,6 +48,9 @@ const Home: React.FC = () => {
               name="search"
             />
           </div>
+          <div className={mainStyle.spaceXsm}></div>
+          <hr />
+          <div className={mainStyle.spaceXsm}></div>
           <ul className={sidebarStyle.navItems}>
             <li>
               <a href="#dashboard" onClick={() => handleNavClick("dashboard")}>

@@ -5,6 +5,10 @@
     box-shadow: 2px 2px 15px 0px #212a3150;
     color: #d6d9d4;
     padding: 20px 10px;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-content: space-between;
 }
 
 .top{
@@ -65,8 +69,17 @@
     color: #000000a0;
   }
 
-.navItems{
-    height: calc(100% - 60px);
-    padding: 0;
-    margin: 0;
-}
+
+  .navItems{
+    height: 80%;
+  }
+
+  .navItems i {
+    font-size: 1.5rem;
+    margin-right: 0.6rem;
+  }
+
+  .navItems > *{
+   margin: 0.8rem auto;
+  }
+
