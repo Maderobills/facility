@@ -1,12 +1,16 @@
 .main{
     background-color: transparent;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
     display: flex;
     padding: 0.5%;
 }
 
+.mainRight{
+    width: calc(100% - 320px);
+    margin: 20px auto;
+}
 
 .spaceXsm{
     padding: 10px;
