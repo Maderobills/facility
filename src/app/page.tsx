@@ -201,7 +201,31 @@ const Home: React.FC = () => {
               </div>
             </div>
             <div className={contStyle.contentBox}>
-                      <h1>Table Here</h1>
+                <div className={`row ${contStyle.tableHeading}`}>
+                  <div className="col-1">QTY</div>
+                  <div className="col">Item</div>
+                  <div className="col">Brand</div>
+                  <div className="col">Location</div>
+                  <div className="col">Model No.</div>
+                  <div className="col">Serial No.</div>
+                  <div className="col">Tag</div>
+                  <div className="col-1">Condition</div>
+                </div>
+                <div className={`row ${contStyle.tableContent}`}>
+                  <div className="col-1">
+                  <div className={contStyle.qty}>
+                  <i className="fi fi-sr-pen-field"></i>
+                  <span>5</span>
+                  </div>
+                  </div>
+                  <div className="col">Projector</div>
+                  <div className="col">Dell</div>
+                  <div className="col">Library</div>
+                  <div className="col">1210s</div>
+                  <div className="col">001515050</div>
+                  <div className="col">DUC/LTC/PRO/10</div>
+                  <div className="col-1">Good</div>
+                </div>
             </div>
           </section>
           <section
