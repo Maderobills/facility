@@ -5,23 +5,93 @@ import mainStyle from "./styles/main.module.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
-import dashStyle from "./styles/dash.module.css"
+import dashStyle from "./styles/dash.module.css";
 import { title } from "process";
+import Button from "./widgets/components/pillbtn/pillbtn";
 
 const Home: React.FC = () => {
   const navItems = [
-    { id: 'dashboard', iconClass: 'fi fi-ss-objects-column', label: 'Dashboard', onClick: () => handleNavClick('dashboard'), view: false, title: 'Overview' },
-    { id: 'space', iconClass: 'fi fi-sr-rectangles-mixed', label: 'Space Layout', onClick: () => handleNavClick('space'), view: true, title: 'Overview'},
-    { id: 'maintenance', iconClass: 'fi fi-ss-tools', label: 'Maintenance', onClick: () => handleNavClick('maintenance'), view: true, title: 'Overview' },
-    { id: 'safety', iconClass: 'fi fi-ss-doctor', label: 'Health and Safety', onClick: () => handleNavClick('safety'), view: true, title: 'Overview' },
-    { id: 'security', iconClass: 'fi fi-ss-shield', label: 'Security Management', onClick: () => handleNavClick('security'), view: true, title: 'Overview' },
-    { id: 'vendor', iconClass: 'fi fi-sr-list-dropdown', label: 'Vendor and Contract', onClick: () => handleNavClick('vendor'), view: true, title: 'Overview'},
-    { id: 'emergency', iconClass: 'fi fi-sr-light-emergency-on', label: 'Emergency Response', onClick: () => handleNavClick('emergency'), view: true, title: 'Overview'},
-    { id: 'assets', iconClass: 'fi fi-sr-wallet', label: 'Assets', onClick: () => handleNavClick('assets'), view: true , title: 'Overview'},
-    { id: 'services', iconClass: 'fi fi-sr-headset', label: 'Services', onClick: () => handleNavClick('services'), view: true ,title: 'Overview'},
-    { id: 'reports', iconClass: 'fi fi-sr-newspaper', label: 'Reports', onClick: () => handleNavClick('reports'), view: true, title: 'Overview' },
+    {
+      id: "dashboard",
+      iconClass: "fi fi-ss-objects-column",
+      label: "Dashboard",
+      onClick: () => handleNavClick("dashboard"),
+      view: false,
+      title: "Overview",
+    },
+    {
+      id: "space",
+      iconClass: "fi fi-sr-rectangles-mixed",
+      label: "Space Layout",
+      onClick: () => handleNavClick("space"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "maintenance",
+      iconClass: "fi fi-ss-tools",
+      label: "Maintenance",
+      onClick: () => handleNavClick("maintenance"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "safety",
+      iconClass: "fi fi-ss-doctor",
+      label: "Health and Safety",
+      onClick: () => handleNavClick("safety"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "security",
+      iconClass: "fi fi-ss-shield",
+      label: "Security Management",
+      onClick: () => handleNavClick("security"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "vendor",
+      iconClass: "fi fi-sr-list-dropdown",
+      label: "Vendor and Contract",
+      onClick: () => handleNavClick("vendor"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "emergency",
+      iconClass: "fi fi-sr-light-emergency-on",
+      label: "Emergency Response",
+      onClick: () => handleNavClick("emergency"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "assets",
+      iconClass: "fi fi-sr-wallet",
+      label: "Assets",
+      onClick: () => handleNavClick("assets"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "services",
+      iconClass: "fi fi-sr-headset",
+      label: "Services",
+      onClick: () => handleNavClick("services"),
+      view: true,
+      title: "Overview",
+    },
+    {
+      id: "reports",
+      iconClass: "fi fi-sr-newspaper",
+      label: "Reports",
+      onClick: () => handleNavClick("reports"),
+      view: true,
+      title: "Overview",
+    },
   ];
-  
 
   const [visibleSection, setVisibleSection] = useState("dashboard");
 
@@ -30,6 +100,9 @@ const Home: React.FC = () => {
     console.log(`Navigating to ${href}`);
   };
 
+  const handleClick = () => {
+    console.log("Button clicked");
+  };
   useEffect(() => {
     const element = document.getElementById(visibleSection);
     if (element) {
@@ -37,7 +110,7 @@ const Home: React.FC = () => {
     }
   }, [visibleSection]);
 
-  const currentNavItem = navItems.find(item => item.id === visibleSection);
+  const currentNavItem = navItems.find((item) => item.id === visibleSection);
 
   return (
     <div className={mainStyle.main}>
@@ -47,7 +120,7 @@ const Home: React.FC = () => {
           username="Shekinah"
           isUser="OtherUser"
           navItems={navItems}
-          onLogout={() => console.log('Logging out')}
+          onLogout={() => console.log("Logging out")}
         />
       </div>
       <main className={mainStyle.mainRight}>
@@ -55,8 +128,8 @@ const Home: React.FC = () => {
           <Topbar
             iconLeft={currentNavItem.iconClass}
             name={currentNavItem.label}
-            iconRight="fi fi-sr-square-plus" 
-            actionText={"Add "+currentNavItem.label}
+            iconRight="fi fi-sr-square-plus"
+            actionText={"Add " + currentNavItem.label}
             showRight={currentNavItem.view}
           />
         )}
@@ -68,38 +141,51 @@ const Home: React.FC = () => {
             }}
           >
             <div className={dashStyle.dashboard}>
-            <div className={`row`}>
-              <div className="col-8">
-                <div className="col-12">
-                  <div className={dashStyle.title}>
-                    {currentNavItem && (
-                      <i className={`${currentNavItem.iconClass}`}></i>
-                    )}
-                    {currentNavItem && (
-                      <h2>{currentNavItem.title}</h2>
-                    )}
+              <div className={`row`}>
+                <div className="col-8">
+                  <div className="col-12">
+                    <div className={dashStyle.title}>
+                      {currentNavItem && (
+                        <i className={`${currentNavItem.iconClass}`}></i>
+                      )}
+                      {currentNavItem && <h2>{currentNavItem.title}</h2>}
+                    </div>
+                  </div>
+                  <div className="col-12 px-4">
+                    <span className={dashStyle.note}>
+                      Filter search to view
+                    </span>
+                    <div className="row">
+                      <div className="col">
+                        <div className={dashStyle.group}>
+                          <div className={dashStyle.icon}>
+                            <i className="fi fi-tr-user-shield"></i>
+                          </div>
+                          <input
+                            className={dashStyle.inputStyle}
+                            type="text"
+                            placeholder="Type to search"
+                            id="search"
+                            name="search"
+                          />
+                        </div>
+                      </div>
+                      <div className="col">
+                        <div className={dashStyle.btnGroup}>
+                          <Button text="Good" onClick={handleClick} />
+                          <Button text="Bad" onClick={handleClick} />
+                          <Button text="Repair" onClick={handleClick} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className={dashStyle.itemCounter}></div>
                   </div>
                 </div>
-                <div className="col-12 px-4">
-                  <span className={dashStyle.note}>Filter search to view</span>
-                <div className={dashStyle.group}>
-          <div className={dashStyle.icon}>
-            <i className="fi fi-tr-user-shield"></i>
-          </div>
-          <input
-            className={dashStyle.inputStyle}
-            type="text"
-            placeholder="Type to search"
-            id="search"
-            name="search"
-          />
-        </div>
-                </div>
-                <div className="col-12"></div>
+                <div className="col"></div>
+                <div className="col"></div>
               </div>
-              <div className="col"></div>
-              <div className="col"></div>
-            </div>
             </div>
           </section>
           <section
@@ -118,7 +204,6 @@ const Home: React.FC = () => {
           >
             <h1>Assets</h1>
           </section>
-          
         </div>
       </main>
     </div>
