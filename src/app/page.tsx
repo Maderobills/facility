@@ -151,7 +151,7 @@ const Home: React.FC = () => {
                       {currentNavItem && <h2>{currentNavItem.title}</h2>}
                     </div>
                   </div>
-                  <div className="col-12 px-4">
+                  <div className="col-12 px-4 my-2">
                     <span className={dashStyle.note}>
                       Filter search to view
                     </span>
@@ -179,8 +179,13 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-12">
-                    <div className={dashStyle.itemCounter}></div>
+                  <div className="col-12 px-4 my-4">
+                    <div className={dashStyle.itemCounter}>
+                      <span>Total: 16</span>
+                      <span>Good: 12</span>
+                      <span>Bad: 2</span>
+                      <span>Repair: 2</span>
+                    </div>
                   </div>
                 </div>
                 <div className="col"></div>
