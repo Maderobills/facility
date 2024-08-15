@@ -6,6 +6,7 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import dashStyle from "./styles/dash.module.css";
+import contStyle from "./styles/content.module.css"
 import { title } from "process";
 import PillButton from "./widgets/components/pillbtn/pillbtn";
 import Button from "./widgets/components/btn/btn";
@@ -198,6 +199,9 @@ const Home: React.FC = () => {
                         </div>
                 </div>
               </div>
+            </div>
+            <div className={contStyle.contentBox}>
+                      <h1>Table Here</h1>
             </div>
           </section>
           <section

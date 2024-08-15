@@ -1,0 +1,8 @@
+.contentBox{
+    background-color: #748D92;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 2px 2px 15px 0px #748D9250;
+    margin-bottom: 10px;
+}
