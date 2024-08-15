@@ -7,7 +7,8 @@ import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import dashStyle from "./styles/dash.module.css";
 import { title } from "process";
-import Button from "./widgets/components/pillbtn/pillbtn";
+import PillButton from "./widgets/components/pillbtn/pillbtn";
+import Button from "./widgets/components/btn/btn";
 
 const Home: React.FC = () => {
   const navItems = [
@@ -172,9 +173,9 @@ const Home: React.FC = () => {
                       </div>
                       <div className="col">
                         <div className={dashStyle.btnGroup}>
-                          <Button text="Good" onClick={handleClick} />
-                          <Button text="Bad" onClick={handleClick} />
-                          <Button text="Repair" onClick={handleClick} />
+                          <PillButton text="Good" onClick={handleClick} />
+                          <PillButton text="Bad" onClick={handleClick} />
+                          <PillButton text="Repair" onClick={handleClick} />
                         </div>
                       </div>
                     </div>
@@ -188,8 +189,14 @@ const Home: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col"></div>
-                <div className="col"></div>
+                <div className="col">Chart Here</div>
+                <div className="col-2">
+                <div className={dashStyle.btnActionGroup}>
+                          <Button text="Excel" onClick={handleClick} icon={"fi fi-sr-file-excel"} variant={"secondary"} />
+                          <Button text="Report" onClick={handleClick} icon={"fi fi-sr-file-excel"} variant={"secondary"} />
+                          <Button text="Print PDF" onClick={handleClick} icon={"fi fi-sr-file-excel"} variant={"secondary"} />
+                        </div>
+                </div>
               </div>
             </div>
           </section>

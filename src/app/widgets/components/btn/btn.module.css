@@ -1,0 +1,16 @@
+.btn{
+    margin: 10px;
+    height: 30px;
+    width: 160px;
+    padding: 0 20px;
+    justify-content: left;
+    align-items: center;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.btn > *{
+   margin: auto 10px;
+}
