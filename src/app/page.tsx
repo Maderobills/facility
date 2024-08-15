@@ -2,17 +2,32 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import mainStyle from "./styles/main.module.css";
-import topbarStyle from "./styles/topbar.module.css";
-import sidebarStyle from "./styles/sidebar.module.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
-import HeadsetMicRoundedIcon from "@mui/icons-material/HeadsetMicRounded";
-import SecurityIcon from "@mui/icons-material/Security";
+import Topbar from "./widgets/topbar/topbar";
+import Sidebar from "./widgets/sidebar/sidebar";
+import dashStyle from "./styles/dash.module.css"
+import { title } from "process";
 
 const Home: React.FC = () => {
+  const navItems = [
+    { id: 'dashboard', iconClass: 'fi fi-ss-objects-column', label: 'Dashboard', onClick: () => handleNavClick('dashboard'), view: false, title: 'Overview' },
+    { id: 'space', iconClass: 'fi fi-sr-rectangles-mixed', label: 'Space Layout', onClick: () => handleNavClick('space'), view: true, title: 'Overview'},
+    { id: 'maintenance', iconClass: 'fi fi-ss-tools', label: 'Maintenance', onClick: () => handleNavClick('maintenance'), view: true, title: 'Overview' },
+    { id: 'safety', iconClass: 'fi fi-ss-doctor', label: 'Health and Safety', onClick: () => handleNavClick('safety'), view: true, title: 'Overview' },
+    { id: 'security', iconClass: 'fi fi-ss-shield', label: 'Security Management', onClick: () => handleNavClick('security'), view: true, title: 'Overview' },
+    { id: 'vendor', iconClass: 'fi fi-sr-list-dropdown', label: 'Vendor and Contract', onClick: () => handleNavClick('vendor'), view: true, title: 'Overview'},
+    { id: 'emergency', iconClass: 'fi fi-sr-light-emergency-on', label: 'Emergency Response', onClick: () => handleNavClick('emergency'), view: true, title: 'Overview'},
+    { id: 'assets', iconClass: 'fi fi-sr-wallet', label: 'Assets', onClick: () => handleNavClick('assets'), view: true , title: 'Overview'},
+    { id: 'services', iconClass: 'fi fi-sr-headset', label: 'Services', onClick: () => handleNavClick('services'), view: true ,title: 'Overview'},
+    { id: 'reports', iconClass: 'fi fi-sr-newspaper', label: 'Reports', onClick: () => handleNavClick('reports'), view: true, title: 'Overview' },
+  ];
+  
+
   const [visibleSection, setVisibleSection] = useState("dashboard");
 
   const handleNavClick = (href: string) => {
     setVisibleSection(href);
+    console.log(`Navigating to ${href}`);
   };
 
   useEffect(() => {
@@ -22,134 +37,70 @@ const Home: React.FC = () => {
     }
   }, [visibleSection]);
 
+  const currentNavItem = navItems.find(item => item.id === visibleSection);
+
   return (
     <div className={mainStyle.main}>
-      <div className={sidebarStyle.sideMenu}>
-        <div className={sidebarStyle.top}>
-          <div className={sidebarStyle.adminUser}>
-            <i className="fi fi-sr-user-pen"></i>
-            <span>Shekinah</span>
-          </div>
-          <div>
-            <i className="fi fi-br-arrow-small-left"></i>
-          </div>
-        </div>
-        <div className={mainStyle.spaceXsm}></div>
-        <div className={sidebarStyle.group}>
-          <div className={sidebarStyle.icon}>
-            <i className="fi fi-tr-user-shield"></i>
-          </div>
-          <input
-            className={sidebarStyle.inputStyle}
-            type="text"
-            placeholder="Type to search"
-            id="search"
-            name="search"
-          />
-        </div>
-        <div className={mainStyle.spaceXsm}></div>
-        <hr />
-        <div className={mainStyle.spaceXsm}></div>
-        <ul className={sidebarStyle.navItems}>
-          <li>
-            <a href="#dashboard" onClick={() => handleNavClick("dashboard")}>
-              <i className="fi fi-ss-objects-column"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="#space" onClick={() => handleNavClick("space")}>
-              <i className="fi fi-sr-rectangles-mixed"></i>
-              <span>Space Layout</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#maintenance"
-              onClick={() => handleNavClick("maintenance")}
-            >
-              <i className="fi fi-ss-tools"></i>
-              <span>Maintenance</span>
-            </a>
-          </li>
-          <li>
-            <a href="#safety" onClick={() => handleNavClick("safety")}>
-              <i className="fi fi-ss-doctor"></i>
-              <span>Health and Safety</span>
-            </a>
-          </li>
-          <li>
-            <a href="#security" onClick={() => handleNavClick("security")}>
-              <i>
-                <SecurityIcon />
-              </i>
-              <span>Security Management</span>
-            </a>
-          </li>
-          <li>
-            <a href="#vendor" onClick={() => handleNavClick("vendor")}>
-              <i className="fi fi-sr-list-dropdown"></i>
-              <span>Vendor and Contract</span>
-            </a>
-          </li>
-          <li>
-            <a href="#emergency" onClick={() => handleNavClick("emergency")}>
-              <i className="fi fi-sr-light-emergency-on"></i>
-              <span>Emergency Response</span>
-            </a>
-          </li>
-          <li>
-            <a href="#assets" onClick={() => handleNavClick("assets")}>
-              <i className="fi fi-sr-wallet"></i>
-              <span>Assets</span>
-            </a>
-          </li>
-          <li>
-            <a href="#services" onClick={() => handleNavClick("services")}>
-              <i>
-                <HeadsetMicRoundedIcon />
-              </i>
-              <span>Services</span>
-            </a>
-          </li>
-          <li>
-            <a href="#reports" onClick={() => handleNavClick("reports")}>
-              <i className="fi fi-sr-newspaper"></i>
-              <span>Reports</span>
-            </a>
-          </li>
-        </ul>
-        <hr />
-        
-        <div className={sidebarStyle.out}>
-          <i className="fi fi-bs-sign-out-alt"></i>
-          <span>Logout</span>
-        </div>
-        
+      <div className={mainStyle.sideMenu}>
+        <Sidebar
+          adminUserIcon="fi fi-sr-user-pen"
+          username="Shekinah"
+          isUser="OtherUser"
+          navItems={navItems}
+          onLogout={() => console.log('Logging out')}
+        />
       </div>
       <main className={mainStyle.mainRight}>
-        <div className={topbarStyle.topbar}>
-          <div className={topbarStyle.left}>
-            <div className={topbarStyle.menuName}>
-              <i className="fi fi-tr-objects-column"></i>
-              <span>Dashboard</span>
-            </div>
-          </div>
-          <div className={topbarStyle.right}>
-            <div className={topbarStyle.action}>
-              <i className="fi fi-sr-square-plus"></i>
-              <span>Add asset</span>
-            </div>
-          </div>
-        </div>
-        <div className={sidebarStyle.content}>
+        {currentNavItem && (
+          <Topbar
+            iconLeft={currentNavItem.iconClass}
+            name={currentNavItem.label}
+            iconRight="fi fi-sr-square-plus" 
+            actionText={"Add "+currentNavItem.label}
+            showRight={currentNavItem.view}
+          />
+        )}
+        <div className={mainStyle.content}>
           <section
             id="dashboard"
             style={{
               display: visibleSection === "dashboard" ? "block" : "none",
             }}
           >
-            <h1>Dashboard</h1>
+            <div className={dashStyle.dashboard}>
+            <div className={`row`}>
+              <div className="col-8">
+                <div className="col-12">
+                  <div className={dashStyle.title}>
+                    {currentNavItem && (
+                      <i className={`${currentNavItem.iconClass}`}></i>
+                    )}
+                    {currentNavItem && (
+                      <h2>{currentNavItem.title}</h2>
+                    )}
+                  </div>
+                </div>
+                <div className="col-12 px-4">
+                  <span className={dashStyle.note}>Filter search to view</span>
+                <div className={dashStyle.group}>
+          <div className={dashStyle.icon}>
+            <i className="fi fi-tr-user-shield"></i>
+          </div>
+          <input
+            className={dashStyle.inputStyle}
+            type="text"
+            placeholder="Type to search"
+            id="search"
+            name="search"
+          />
+        </div>
+                </div>
+                <div className="col-12"></div>
+              </div>
+              <div className="col"></div>
+              <div className="col"></div>
+            </div>
+            </div>
           </section>
           <section
             id="space"
@@ -159,6 +110,15 @@ const Home: React.FC = () => {
           >
             <h1>Space Layout</h1>
           </section>
+          <section
+            id="assets"
+            style={{
+              display: visibleSection === "assets" ? "block" : "none",
+            }}
+          >
+            <h1>Assets</h1>
+          </section>
+          
         </div>
       </main>
     </div>

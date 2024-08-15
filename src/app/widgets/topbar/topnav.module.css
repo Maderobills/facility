@@ -1,0 +1,34 @@
+.topbar{
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin: auto;
+}
+
+.left{
+    font-size: 1.6rem;
+    color: #212a31;
+}
+
+.left i{
+    margin-right: 15px;
+}
+
+.action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #124E66;
+    padding: 5px 10px;
+    color: #d6d9d6;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.action > *{
+    display: flex;
+    margin: auto 5px;
+   
+  }

@@ -31,9 +31,6 @@
     margin: auto 5px;
 }
 
-.searchInput input{
-    border-radius: 5px;
-}
 
 .group {
     display: flex;
