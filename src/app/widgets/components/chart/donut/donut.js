@@ -8,6 +8,25 @@ if (typeof Highcharts === 'object') {
 }
 
 export default function Doughnut3DChart({ data }) {
+    const getColor = (name) => {
+        switch (name) {
+            case 'Good':
+                return '#28A745';
+            case 'Bad':
+                return '#B22222';
+            case 'Repair':
+                return '#FFA500';
+            default:
+                return '#212a31';
+        }
+    };
+
+    // Map data to include colors based on the item name
+    const coloredData = data.map(item => ({
+        ...item,
+        color: getColor(item.name),
+    }));
+
     const options = {
         chart: {
             type: 'pie',
@@ -39,7 +58,7 @@ export default function Doughnut3DChart({ data }) {
         },
         series: [{
             type: 'pie',
-            data: data
+            data: coloredData // Use the data with colors
         }]
     };
 
