@@ -1,17 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import mainStyle from "./styles/main.module.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
-import dashStyle from "./styles/dash.module.css";
-import contStyle from "./styles/content.module.css";
-import { title } from "process";
-import PillButton from "./widgets/components/pillbtn/pillbtn";
-import Button from "./widgets/components/btn/btn";
-import DashboardWidget from "./widgets/dashtop/dashboard";
-import TableWidget from "./widgets/table/table";
 import Assets from "./pages/assets/assets";
 
 const Home: React.FC = () => {
