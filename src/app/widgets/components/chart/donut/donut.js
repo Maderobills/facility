@@ -1,47 +1,47 @@
-// Doughnut.js
-import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import React from "react";
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts3D from 'highcharts/highcharts-3d';
 
-export default function DoughnutChart() {
-    const chartRef = useRef(null);
-    const chartInstance = useRef(null);
+if (typeof Highcharts === 'object') {
+    Highcharts3D(Highcharts);
+}
 
-    useEffect(() => {
-        if (chartInstance.current) {
-            chartInstance.current.destroy();
-        }
-        const myChartRef = chartRef.current.getContext('2d');
-
-        chartInstance.current = new Chart(myChartRef, {
-            type: 'doughnut',
-            data: {
-                
-                datasets: [{
-                    label: 'My First Dataset',
-                    data: [300, 50, 100],
-                    backgroundColor: [
-                        '#28A745',
-                        '#FFA500',
-                        '#B22222'
-                    ],
-                    borderColor: '#ffffff00',
-                    borderJoinStyle: 'bevel',
-                    hoverBorderJoinStyle: 'round',
-                    hoverOffset: 10
-                }]
+export default function Doughnut3DChart({ data }) {
+    const options = {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 30,
+                beta: 0,
+            },
+            backgroundColor: 'transparent',
+            height: 200,
+            width: 200, 
+            margin: [0, 0, 0, 0],
+            spacing: [0, 0, 0, 0],
+        },
+        plotOptions: {
+            pie: {
+                innerSize: '30%',
+                depth: 20,
+                shadow: false,
+                size: '100%',
+                dataLabels: {
+                    enabled: false,
+                },
+                borderWidth: 0,
             }
-        });
+        },
+        title: {
+            text: '',
+        },
+        series: [{
+            type: 'pie',
+            data: data
+        }]
+    };
 
-        return () => {
-            if (chartInstance.current) {
-                chartInstance.current.destroy();
-            }
-        };
-    }, []);
-
-    return (
-        <div style={{ width: '80%', height: '80%' }}>
-            <canvas ref={chartRef} ></canvas>
-        </div>
-    );
+    return <HighchartsReact highcharts={Highcharts} options={options} />;
 }

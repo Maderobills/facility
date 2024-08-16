@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./dash.module.css";
 import Button from "../components/btn/btn";
 import PillButton from "../components/pillbtn/pillbtn";
-import DoughnutChart from "../components/chart/donut/donut";
+import Doughnut3DChart from "../components/chart/donut/donut";
 
 type TitleWidgetProps = {
   iconClass?: string;
@@ -19,7 +19,7 @@ type DashboardWidgetProps = {
   title: string;
   filterButtons: string[];
   itemCounts: { label: string; count: number }[];
-  onSearchInputChange: (input: string) => void; // Add this prop
+  onSearchInputChange: (input: string) => void;
 };
 
 // TitleWidget Component
@@ -33,7 +33,7 @@ const TitleWidget: React.FC<TitleWidgetProps> = ({ iconClass, title }) => {
 };
 
 // ItemCounter Component
-const ItemCounter: React.FC<ItemCounterProps> = ({ total, items }) => {
+const ItemCounter: React.FC<ItemCounterProps> = ({ items }) => {
   return (
     <div className={styles.itemCounter}>
       {items.map((item, index) => (
@@ -50,15 +50,23 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
   title,
   filterButtons,
   itemCounts,
-  onSearchInputChange, // Use the prop
+  onSearchInputChange,
 }) => {
   const handlePillButtonClick = (text: string) => {
     console.log(`${text} button clicked`);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSearchInputChange(event.target.value); // Call the passed function
+    onSearchInputChange(event.target.value);
   };
+
+  // Transform itemCounts into the format required for the chart, excluding "Total"
+  const chartData = itemCounts
+    .filter(item => item.label !== "Total") // Exclude items with label "Total"
+    .map(item => ({
+      name: item.label,
+      y: item.count,
+    }));
 
   return (
     <div className={styles.dashboard}>
@@ -81,7 +89,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
                     placeholder="Type to search"
                     id="search"
                     name="search"
-                    onChange={handleInputChange} // Update state in Assets component
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -101,7 +109,8 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
           </div>
         </div>
         <div className={`col ${styles.chart}`}>
-        <DoughnutChart />
+          
+          <Doughnut3DChart data={chartData} />
         </div>
         <div className="col-2">
           <div className={styles.btnActionGroup}>
