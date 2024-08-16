@@ -7,10 +7,11 @@ interface TopbarProps {
   name: string;
   iconRight: string;
   actionText: string;
-  showRight?: boolean; // Optional boolean prop to control visibility of .right section
+  showRight?: boolean;
+  onClick: () => void; // Corrected the onClick type
 }
 
-const Topbar: React.FC<TopbarProps> = ({ iconLeft, name, iconRight, actionText, showRight = true }) => {
+const Topbar: React.FC<TopbarProps> = ({ iconLeft, name, iconRight, actionText, showRight = true, onClick }) => {
   return (
     <div className={topbarStyle.topbar}>
       <div className={topbarStyle.left}>
@@ -21,7 +22,7 @@ const Topbar: React.FC<TopbarProps> = ({ iconLeft, name, iconRight, actionText, 
       </div>
       {showRight && (
         <div className={topbarStyle.right}>
-          <div className={topbarStyle.action}>
+          <div className={topbarStyle.action} onClick={onClick}> {/* Updated onClick here */}
             <i className={classNames(iconRight)}></i>
             <span>{actionText}</span>
           </div>

@@ -5,6 +5,7 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import Assets from "./pages/assets/assets";
+import ModalWidget from "./widgets/components/modal/addmodal";
 
 const Home: React.FC = () => {
   const navItems = [
@@ -91,6 +92,7 @@ const Home: React.FC = () => {
   ];
 
   const [visibleSection, setVisibleSection] = useState("dashboard");
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleNavClick = (href: string) => {
     setVisibleSection(href);
@@ -105,6 +107,9 @@ const Home: React.FC = () => {
   }, [visibleSection]);
 
   const currentNavItem = navItems.find((item) => item.id === visibleSection);
+
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   return (
     <div className={mainStyle.main}>
@@ -125,6 +130,7 @@ const Home: React.FC = () => {
             iconRight="fi fi-sr-square-plus"
             actionText={"Add " + currentNavItem.label}
             showRight={currentNavItem.view}
+            onClick={handleModalOpen}
           />
         )}
         <div className={mainStyle.content}>
@@ -135,6 +141,7 @@ const Home: React.FC = () => {
             }}
           >
             <h1>DashBoard</h1>
+           
           </section>
           <section
             id="space"
@@ -159,6 +166,15 @@ const Home: React.FC = () => {
           </section>
         </div>
       </main>
+
+      {currentNavItem && (
+        <ModalWidget
+        open={modalOpen}
+        onClose={handleModalClose}
+        title={"Add " + currentNavItem.label}
+        description="This is content inside the dashboard modal."
+      />
+      )}
     </div>
   );
 };
