@@ -6,10 +6,13 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import dashStyle from "./styles/dash.module.css";
-import contStyle from "./styles/content.module.css"
+import contStyle from "./styles/content.module.css";
 import { title } from "process";
 import PillButton from "./widgets/components/pillbtn/pillbtn";
 import Button from "./widgets/components/btn/btn";
+import DashboardWidget from "./widgets/dashtop/dashboard";
+import TableWidget from "./widgets/table/table";
+import Assets from "./pages/assets/assets";
 
 const Home: React.FC = () => {
   const navItems = [
@@ -142,91 +145,7 @@ const Home: React.FC = () => {
               display: visibleSection === "dashboard" ? "block" : "none",
             }}
           >
-            <div className={dashStyle.dashboard}>
-              <div className={`row`}>
-                <div className="col-8">
-                  <div className="col-12">
-                    <div className={dashStyle.title}>
-                      {currentNavItem && (
-                        <i className={`${currentNavItem.iconClass}`}></i>
-                      )}
-                      {currentNavItem && <h2>{currentNavItem.title}</h2>}
-                    </div>
-                  </div>
-                  <div className="col-12 px-4 my-2">
-                    <span className={dashStyle.note}>
-                      Filter search to view
-                    </span>
-                    <div className="row">
-                      <div className="col">
-                        <div className={dashStyle.group}>
-                          <div className={dashStyle.icon}>
-                            <i className="fi fi-tr-user-shield"></i>
-                          </div>
-                          <input
-                            className={dashStyle.inputStyle}
-                            type="text"
-                            placeholder="Type to search"
-                            id="search"
-                            name="search"
-                          />
-                        </div>
-                      </div>
-                      <div className="col">
-                        <div className={dashStyle.btnGroup}>
-                          <PillButton text="Good" onClick={handleClick} />
-                          <PillButton text="Bad" onClick={handleClick} />
-                          <PillButton text="Repair" onClick={handleClick} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 px-4 my-4">
-                    <div className={dashStyle.itemCounter}>
-                      <span>Total: 16</span>
-                      <span>Good: 12</span>
-                      <span>Bad: 2</span>
-                      <span>Repair: 2</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="col">Chart Here</div>
-                <div className="col-2">
-                <div className={dashStyle.btnActionGroup}>
-                          <Button text="Excel" onClick={handleClick} icon={"fi fi-sr-file-excel"} variant={"secondary"} />
-                          <Button text="Report" onClick={handleClick} icon={"fi fi-sr-file-excel"} variant={"secondary"} />
-                          <Button text="Print PDF" onClick={handleClick} icon={"fi fi-sr-file-excel"} variant={"secondary"} />
-                        </div>
-                </div>
-              </div>
-            </div>
-            <div className={contStyle.contentBox}>
-                <div className={`row ${contStyle.tableHeading}`}>
-                  <div className="col-1">QTY</div>
-                  <div className="col">Item</div>
-                  <div className="col">Brand</div>
-                  <div className="col">Location</div>
-                  <div className="col">Model No.</div>
-                  <div className="col">Serial No.</div>
-                  <div className="col">Tag</div>
-                  <div className="col-1">Condition</div>
-                </div>
-                <div className={`row ${contStyle.tableContent}`}>
-                  <div className="col-1">
-                  <div className={contStyle.qty}>
-                  <i className="fi fi-sr-pen-field"></i>
-                  <span>5</span>
-                  </div>
-                  </div>
-                  <div className="col">Projector</div>
-                  <div className="col">Dell</div>
-                  <div className="col">Library</div>
-                  <div className="col">1210s</div>
-                  <div className="col">001515050</div>
-                  <div className="col">DUC/LTC/PRO/10</div>
-                  <div className="col-1">Good</div>
-                </div>
-            </div>
+            <h1>DashBoard</h1>
           </section>
           <section
             id="space"
@@ -242,7 +161,12 @@ const Home: React.FC = () => {
               display: visibleSection === "assets" ? "block" : "none",
             }}
           >
-            <h1>Assets</h1>
+            {currentNavItem && (
+              <Assets
+                dashboardTitle={currentNavItem.title}
+                dashboardIconClass={currentNavItem.iconClass}
+              />
+            )}
           </section>
         </div>
       </main>

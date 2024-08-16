@@ -1,0 +1,94 @@
+.dashboard{
+    background-color: #748D92;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 15px 0px #748D9250;
+    margin-bottom: 10px;
+
+}
+
+.title{
+    display: flex;
+    margin: 0;
+    padding: 10px 15px;
+    align-items: center;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.title > *{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto 5px;
+}
+
+.note{
+    font-size: 0.6rem;
+    color: #d6d9d4;
+}
+
+.group {
+    display: flex;
+    line-height: 20px;
+    align-items: center;
+    position: relative;
+   
+  }
+
+  .inputStyle {
+    background-color: #d6d9d4;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 40px; 
+    max-width: 250px;
+    height: 35px;
+    font-size: small;
+    box-sizing: border-box;
+    transition: .5s ease;
+    color: #212a31;
+}
+
+  .group input::placeholder {
+    color: #00000050;
+  }
+  
+  .group input:focus, .group input:hover{
+    outline: none;
+    border-color: #88000020;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px #88000020;
+  }
+  
+  .icon {
+    position: absolute;
+    left: 1rem;
+    fill: none;
+    width: 1rem;
+    height: 1rem;
+    color: #000000a0;
+  }
+
+
+  .itemCounter{
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: space-between;
+  }
+
+  .itemCounter > *{
+    
+  }
+
+  .btnActionGroup{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }

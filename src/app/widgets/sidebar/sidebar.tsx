@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navI
 
       <div className={sidebarStyle.group}>
           <div className={sidebarStyle.icon}>
-            <i className="fi fi-tr-user-shield"></i>
+            <i className="fi fi-tr-search-alt"></i>
           </div>
           <input
             className={sidebarStyle.inputStyle}

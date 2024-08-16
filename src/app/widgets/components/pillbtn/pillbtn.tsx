@@ -1,13 +1,13 @@
 import React from 'react';
 import pillbtnStyles from "./pillbtn.module.css"
 
-interface ButtonProps {
+interface PillButtonProps {
   text: string;
   onClick: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
-  // Determine the color based on the text value
+const PillButton: React.FC<PillButtonProps> = ({ text, onClick }) => {
+
   const getTextColor = (text: string) => {
     switch (text) {
       case 'Good':
@@ -32,4 +32,4 @@ const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
   );
 };
 
-export default Button;
+export default PillButton;

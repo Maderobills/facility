@@ -1,0 +1,44 @@
+.contentBox{
+    background-color: #748D92;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 2px 2px 15px 0px #748D9250;
+    margin-bottom: 10px;
+    overflow: hidden;
+    overflow-x: auto;
+    padding: 5px 20px;
+}
+
+
+.tableHeading{
+    color: #fff;
+    font-weight: 600;
+   
+    
+}
+
+.tableHeading > *{
+    border-right: 1px solid #d6d9d4;
+}
+
+.tableContent{
+    background-color: #d6d9d4;
+    color: #124E66;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.qty{
+    padding: auto;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.tableContent i{
+   margin-right: 10px;
+   cursor: pointer;
+}
