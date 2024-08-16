@@ -32,7 +32,7 @@ export default function Doughnut3DChart({ data }) {
             type: 'pie',
             options3d: {
                 enabled: true,
-                alpha: 30,
+                alpha: 65,
                 beta: 0,
             },
             backgroundColor: 'transparent',
@@ -43,7 +43,7 @@ export default function Doughnut3DChart({ data }) {
         },
         plotOptions: {
             pie: {
-                innerSize: '30%',
+                innerSize: '35%',
                 depth: 20,
                 shadow: false,
                 size: '100%',

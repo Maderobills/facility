@@ -97,9 +97,6 @@ const Home: React.FC = () => {
     console.log(`Navigating to ${href}`);
   };
 
-  const handleClick = () => {
-    console.log("Button clicked");
-  };
   useEffect(() => {
     const element = document.getElementById(visibleSection);
     if (element) {
