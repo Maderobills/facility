@@ -2,28 +2,55 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import { styled } from '@mui/material/styles';
 
 interface AssetFormProps {
   onSubmit?: (formData: { [key: string]: string }) => void;
 }
 
+// Custom styled TextField
+const CustomTextField = styled(TextField)({
+  '& .MuiInputLabel-root': {
+    color: '#212A31',
+    backgroundColor: 'none', 
+    
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: '#748D92', 
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#748D92',
+    },
+    '&:hover fieldset': {
+      borderColor: '#124E66',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#212A31',
+    },
+  },
+  '& .MuiOutlinedInput-root input': {
+    backgroundColor: 'transparent',
+  },
+});
+
 const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = React.useState<{ [key: string]: string }>({
     itemName: '',
     brandName: '',
-    location: '', // Update this to match the ID in the input
+    location: '',
     modelNo: '',
     serialNo: '',
     tagName: '',
-    condition: 'Good', // Set a default value for the dropdown
+    condition: 'Good',
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
     const { id, name, value } = event.target as HTMLInputElement;
-    const key = name || id; // Use name for select elements, id for others
+    const key = name || id;
     setFormData((prevData) => ({
       ...prevData,
-      [key]: value as string, // Ensure value is correctly set as a string
+      [key]: value as string,
     }));
   };
 
@@ -45,74 +72,67 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
       onSubmit={handleSubmit}
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-        <TextField
+        <CustomTextField
           id="itemName"
           label="Item Name"
           variant="outlined"
           value={formData.itemName}
           onChange={handleChange}
-          sx={{ mx: 1 }} // Horizontal margin set here
         />
-        <TextField
+        <CustomTextField
           id="brandName"
           label="Brand Name"
           variant="outlined"
           value={formData.brandName}
           onChange={handleChange}
-          sx={{ mx: 1 }} // Horizontal margin set here
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-        <TextField
-          id="location" // Update the ID here to match the state key
+        <CustomTextField
+          id="location"
           label="Location"
           variant="outlined"
-          value={formData.location} // Match this with the updated state key
+          value={formData.location}
           onChange={handleChange}
-          sx={{ mx: 1 }}
         />
-        <TextField
+        <CustomTextField
           id="modelNo"
           label="Model No."
           variant="outlined"
           value={formData.modelNo}
           onChange={handleChange}
-          sx={{ mx: 1 }} 
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-        <TextField
+        <CustomTextField
           id="serialNo"
           label="Serial No."
           variant="outlined"
           value={formData.serialNo}
           onChange={handleChange}
-          sx={{ mx: 1 }} // Horizontal margin set here
         />
-        <TextField
+        <CustomTextField
           id="tagName"
           label="Tag Name"
           variant="outlined"
           value={formData.tagName}
           onChange={handleChange}
-          sx={{ mx: 1 }} // Horizontal margin set here
         />
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-        <TextField
+      <Box sx={{ display: 'block', justifyContent: 'space-between', gap: 2 }}>
+        <CustomTextField
           id="condition"
-          name="condition" // Add the name attribute for the select field
+          name="condition"
           label="Condition"
           variant="outlined"
           select
           value={formData.condition}
           onChange={handleChange}
-          sx={{ mx: 1 }}
         >
           <MenuItem value="Good">Good</MenuItem>
           <MenuItem value="Repair">Repair</MenuItem>
           <MenuItem value="Bad">Bad</MenuItem>
-        </TextField>
+        </CustomTextField>
       </Box>
       <Box sx={{ m: 1 }}>
         <button type="submit">Submit</button>

@@ -1,0 +1,12 @@
+.customTextField .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: gray; /* Default border color */
+  }
+  
+  .customTextField .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: blue; /* Border color when hovered */
+  }
+  
+  .customTextField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: green; /* Border color when focused */
+  }
+  

@@ -21,7 +21,6 @@ export default function Doughnut3DChart({ data }) {
         }
     };
 
-    // Map data to include colors based on the item name
     const coloredData = data.map(item => ({
         ...item,
         color: getColor(item.name),
@@ -32,7 +31,7 @@ export default function Doughnut3DChart({ data }) {
             type: 'pie',
             options3d: {
                 enabled: true,
-                alpha: 55,
+                alpha: 45,
                 beta: 0,
             },
             backgroundColor: 'transparent',
@@ -58,7 +57,7 @@ export default function Doughnut3DChart({ data }) {
         },
         series: [{
             type: 'pie',
-            data: coloredData // Use the data with colors
+            data: coloredData 
         }]
     };
 
