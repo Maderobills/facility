@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./dash.module.css";
 import Button from "../components/btn/btn";
 import PillButton from "../components/pillbtn/pillbtn";
+import DoughnutChart from "../components/chart/donut/donut";
 
 type TitleWidgetProps = {
   iconClass?: string;
@@ -99,7 +100,9 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
             <ItemCounter items={itemCounts} total={0} />
           </div>
         </div>
-        <div className="col">Chart Here</div>
+        <div className={`col ${styles.chart}`}>
+        <DoughnutChart />
+        </div>
         <div className="col-2">
           <div className={styles.btnActionGroup}>
             <Button
