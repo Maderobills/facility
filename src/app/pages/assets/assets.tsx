@@ -1,112 +1,101 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./assets.module.css";
 import DashboardWidget from "@/app/widgets/dashtop/dashboard";
 import TableWidget from "@/app/widgets/table/table";
+import LinearLoader from "@/app/widgets/components/loader/linear";
+import { db } from "../../firebase/sync";
+import { collection, getDocs } from "firebase/firestore";
 
-// Define the props for the Assets component
+interface Asset {
+  condition: string;
+  count: number;
+  Item: string;
+  Brand: string;
+  Location: string;
+  Model: string;
+  serial: string;
+  Tag: string;
+  Condition: string;
+}
+
 interface AssetsProps {
   dashboardTitle: string;
   dashboardIconClass: string;
 }
 
 const Assets: React.FC<AssetsProps> = ({ dashboardTitle, dashboardIconClass }) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [tableData, setTableData] = useState<Asset[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string>("All");
 
   const tableHeadings = [
     "Count",
     "Item",
     "Brand",
     "Location",
-    "Model No.",
-    "Serial No.",
+    "Model",
+    "Serial",
     "Tag",
     "Condition",
   ];
 
-  const tableData = [
-    {
-      item: "Projector",
-      brand: "Dell",
-      location: "Library",
-      modelNo: "1210s",
-      serialNo: "001515050",
-      tag: "DUC/LTC/PRO/10",
-      condition: "Good",
-    },
-    {
-      item: "Laptop",
-      brand: "HP",
-      location: "Office",
-      modelNo: "Pavilion",
-      serialNo: "002345678",
-      tag: "DUC/OFC/LPT/22",
-      condition: "Repair",
-    },
-    {
-      item: "Monitor",
-      brand: "Samsung",
-      location: "Conference Room",
-      modelNo: "S24F350",
-      serialNo: "004567890",
-      tag: "DUC/CNF/MON/15",
-      condition: "Bad",
-    },
-    {
-      item: "Projector",
-      brand: "Epson",
-      location: "Classroom",
-      modelNo: "EB-S41",
-      serialNo: "005678912",
-      tag: "DUC/CLS/PRO/11",
-      condition: "Good",
-    },
-    {
-      item: "Keyboard",
-      brand: "Logitech",
-      location: "Office",
-      modelNo: "K120",
-      serialNo: "006789123",
-      tag: "DUC/OFC/KBD/03",
-      condition: "Good",
-    },
-    {
-      item: "Mouse",
-      brand: "Dell",
-      location: "Library",
-      modelNo: "WM126",
-      serialNo: "007890234",
-      tag: "DUC/LIB/MS/06",
-      condition: "Good",
-    },
-    {
-      item: "Printer",
-      brand: "HP",
-      location: "Reception",
-      modelNo: "LaserJet Pro",
-      serialNo: "008901345",
-      tag: "DUC/REC/PRNT/09",
-      condition: "Good",
-    },
-  ];
+  useEffect(() => {
+    const fetchTableData = async () => {
+      try {
+        setLoading(true);
+        
+        const querySnapshot = await getDocs(collection(db, "Assets"));
+        const data: Asset[] = querySnapshot.docs.map(doc => {
+          const assetData = doc.data() as Asset;
+          console.log("Fetched asset data:", assetData); 
+          return {
+            id: doc.id,
+            ...assetData
+          };
+        });
+        setTableData(data);
+      } catch (error) {
+        console.error("Error fetching table data: ", error);
+        setError("Error fetching table data.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Filter table data based on search value
-  const filteredData = tableData.filter((row) =>
-    Object.values(row).some((value) =>
-      value.toLowerCase().includes(searchValue.toLowerCase())
-    )
-  );
+    fetchTableData();
+  }, []);
 
-  // Calculate counts based on conditions
-  const countByCondition = filteredData.reduce((acc: { [key: string]: number }, curr) => {
+  const handleFilterButton = (filter: string) => {
+    setActiveFilter(filter);
+  };
+
+  if (loading) {
+    return <LinearLoader />;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  const filteredData = tableData.filter(row => {
+    const matchesSearch = Object.values(row).some(value =>
+      typeof value === 'string' && value.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    const matchesFilter =
+      activeFilter === "All" || row.condition.toLowerCase() === activeFilter.toLowerCase();
+    return matchesSearch && matchesFilter;
+  });
+
+  const countByCondition = filteredData.reduce((acc: Record<string, number>, curr) => {
     const condition = curr.condition || 'Unknown';
     acc[condition] = (acc[condition] || 0) + 1;
     return acc;
   }, {});
 
-  // Define filter buttons (optional)
   const filterButtons = ["All", "Good", "Repair", "Bad"];
 
-  // Define item counts for the DashboardWidget
   const itemCounts = [
     { label: "Total", count: filteredData.length },
     { label: "Good", count: countByCondition["Good"] || 0 },
@@ -124,8 +113,9 @@ const Assets: React.FC<AssetsProps> = ({ dashboardTitle, dashboardIconClass }) =
         titleIconClass={dashboardIconClass}
         title={dashboardTitle}
         filterButtons={filterButtons}
+        filterButtonsOnClick={handleFilterButton}
         itemCounts={itemCounts}
-        onSearchInputChange={handleSearchInputChange} // Pass the search handler
+        onSearchInputChange={handleSearchInputChange}
       />
       <TableWidget headings={tableHeadings} data={filteredData} />
     </div>

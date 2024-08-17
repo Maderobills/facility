@@ -1,5 +1,5 @@
 import React from 'react';
-import pillbtnStyles from "./pillbtn.module.css"
+import pillbtnStyles from "./pillbtn.module.css";
 
 interface PillButtonProps {
   text: string;
@@ -7,7 +7,6 @@ interface PillButtonProps {
 }
 
 const PillButton: React.FC<PillButtonProps> = ({ text, onClick }) => {
-
   const getTextColor = (text: string) => {
     switch (text) {
       case 'Good':
@@ -22,7 +21,7 @@ const PillButton: React.FC<PillButtonProps> = ({ text, onClick }) => {
   };
 
   return (
-    <button 
+    <button
       style={{ color: getTextColor(text) }}
       className={pillbtnStyles.btn}
       onClick={onClick}

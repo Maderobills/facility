@@ -1,68 +1,36 @@
 import React from "react";
 import styles from "./dash.module.css";
-import Button from "../components/btn/btn";
 import PillButton from "../components/pillbtn/pillbtn";
 import Doughnut3DChart from "../components/chart/donut/donut";
+import Button from "../components/btn/btn";
 
-type TitleWidgetProps = {
-  iconClass?: string;
-  title: string;
-};
-
-type ItemCounterProps = {
-  total: number;
-  items: { label: string; count: number }[];
-};
-
-type DashboardWidgetProps = {
+interface DashboardWidgetProps {
   titleIconClass: string;
   title: string;
   filterButtons: string[];
+  filterButtonsOnClick: (filter: string) => void;
   itemCounts: { label: string; count: number }[];
   onSearchInputChange: (input: string) => void;
-};
-
-// TitleWidget Component
-const TitleWidget: React.FC<TitleWidgetProps> = ({ iconClass, title }) => {
-  return (
-    <div className={styles.title}>
-      {iconClass && <i className={iconClass}></i>}
-      <h2>{title}</h2>
-    </div>
-  );
-};
-
-// ItemCounter Component
-const ItemCounter: React.FC<ItemCounterProps> = ({ items }) => {
-  return (
-    <div className={styles.itemCounter}>
-      {items.map((item, index) => (
-        <span key={index}>
-          {item.label}: {item.count}
-        </span>
-      ))}
-    </div>
-  );
-};
+}
 
 const DashboardWidget: React.FC<DashboardWidgetProps> = ({
   titleIconClass,
   title,
   filterButtons,
+  filterButtonsOnClick,
   itemCounts,
   onSearchInputChange,
 }) => {
-  const handlePillButtonClick = (text: string) => {
-    console.log(`${text} button clicked`);
+  const handlePillButtonClick = (filter: string) => {
+    filterButtonsOnClick(filter);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearchInputChange(event.target.value);
   };
 
-  // Transform itemCounts into the format required for the chart, excluding "Total"
   const chartData = itemCounts
-    .filter(item => item.label !== "Total") // Exclude items with label "Total"
+    .filter(item => item.label !== "Total")
     .map(item => ({
       name: item.label,
       y: item.count,
@@ -73,7 +41,10 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
       <div className="row">
         <div className="col-8">
           <div className="col-12">
-            <TitleWidget iconClass={titleIconClass} title={title} />
+            <div className={styles.title}>
+              {titleIconClass && <i className={titleIconClass}></i>}
+              <h2>{title}</h2>
+            </div>
           </div>
           <div className="col-12 px-4 my-2">
             <span className={styles.note}>Filter search to view</span>
@@ -105,11 +76,16 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
             </div>
           </div>
           <div className="col-12 px-4 my-4">
-            <ItemCounter items={itemCounts} total={0} />
+            <div className={styles.itemCounter}>
+              {itemCounts.map((item, index) => (
+                <span key={index}>
+                  {item.label}: {item.count}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
         <div className={`col ${styles.chart}`}>
-          
           <Doughnut3DChart data={chartData} />
         </div>
         <div className="col-2">

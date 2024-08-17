@@ -8,3 +8,11 @@
     align-items: center;
     border-radius: 50px;
 }
+
+.btn:hover{
+    color: #124E66;
+}
+
+.btn.active{
+    color: #124E66;
+}
