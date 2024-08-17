@@ -5,17 +5,19 @@ import TableWidget from "@/app/widgets/table/table";
 import LinearLoader from "@/app/widgets/components/loader/linear";
 import { db } from "../../firebase/sync";
 import { collection, getDocs } from "firebase/firestore";
+import * as XLSX from "xlsx";
+
 
 interface Asset {
-  condition: string;
+  
   count: number;
-  Item: string;
-  Brand: string;
-  Location: string;
-  Model: string;
+  item: string;
+  brand: string;
+  location: string;
+  model: string;
   serial: string;
-  Tag: string;
-  Condition: string;
+  tag: string;
+  condition: string;
 }
 
 interface AssetsProps {
@@ -71,6 +73,52 @@ const Assets: React.FC<AssetsProps> = ({ dashboardTitle, dashboardIconClass }) =
     setActiveFilter(filter);
   };
 
+  const handleSearchInputChange = (input: string) => {
+    setSearchValue(input);
+  };
+
+  const handleExcelClick = () => {
+  try {
+    // Define the desired order of columns
+    const orderedData = filteredData.map(asset => ({
+      Count: asset.count,
+      Item: asset.item,
+      Brand: asset.brand,
+      Location: asset.location,
+      Model: asset.model,
+      Serial: asset.serial,
+      Tag: asset.tag,
+      Condition: asset.condition,
+    }));
+
+    // Create a worksheet from the ordered data
+    const worksheet = XLSX.utils.json_to_sheet(orderedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Assets");
+
+    // Add table headings
+    XLSX.utils.sheet_add_aoa(worksheet, [
+      ["Count", "Item", "Brand", "Location", "Model", "Serial", "Tag", "Condition"],
+    ], { origin: "A1" });
+
+    // Write the workbook to an Excel file
+    XLSX.writeFile(workbook, "Assets_Data.xlsx");
+    console.log("Data exported to Excel successfully");
+  } catch (error) {
+    console.error("Error exporting data to Excel:", error);
+  }
+};
+
+  const handleReportClick = () => {
+    // Logic to generate or download report
+    console.log("Generate Report");
+  };
+
+  const handlePrintPdfClick = () => {
+    // Logic to print or download as PDF
+    console.log("Print PDF");
+  };
+
   if (loading) {
     return <LinearLoader />;
   }
@@ -103,10 +151,6 @@ const Assets: React.FC<AssetsProps> = ({ dashboardTitle, dashboardIconClass }) =
     { label: "Bad", count: countByCondition["Bad"] || 0 },
   ];
 
-  const handleSearchInputChange = (input: string) => {
-    setSearchValue(input);
-  };
-
   return (
     <div className={styles.assetsPage}>
       <DashboardWidget
@@ -116,6 +160,11 @@ const Assets: React.FC<AssetsProps> = ({ dashboardTitle, dashboardIconClass }) =
         filterButtonsOnClick={handleFilterButton}
         itemCounts={itemCounts}
         onSearchInputChange={handleSearchInputChange}
+        tableHeadings={tableHeadings}
+        tableData={filteredData}
+        onExcelClick={handleExcelClick}
+        onReportClick={handleReportClick}
+        onPrintPdfClick={handlePrintPdfClick}
       />
       <TableWidget headings={tableHeadings} data={filteredData} />
     </div>

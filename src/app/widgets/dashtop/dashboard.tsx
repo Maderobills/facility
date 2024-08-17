@@ -11,6 +11,11 @@ interface DashboardWidgetProps {
   filterButtonsOnClick: (filter: string) => void;
   itemCounts: { label: string; count: number }[];
   onSearchInputChange: (input: string) => void;
+  tableHeadings: string[];
+  tableData: any[]; // Add this line to accept the table data
+  onExcelClick: () => void;
+  onReportClick: () => void;
+  onPrintPdfClick: () => void;
 }
 
 const DashboardWidget: React.FC<DashboardWidgetProps> = ({
@@ -20,6 +25,11 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
   filterButtonsOnClick,
   itemCounts,
   onSearchInputChange,
+  tableHeadings,
+  tableData,
+  onExcelClick,
+  onReportClick,
+  onPrintPdfClick,
 }) => {
   const handlePillButtonClick = (filter: string) => {
     filterButtonsOnClick(filter);
@@ -92,19 +102,19 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
           <div className={styles.btnActionGroup}>
             <Button
               text="Excel"
-              onClick={() => {}}
+              onClick={onExcelClick}
               icon="fi fi-sr-file-excel"
               variant="secondary"
             />
             <Button
               text="Report"
-              onClick={() => {}}
+              onClick={onReportClick}
               icon="fi fi-sr-file-word"
               variant="secondary"
             />
             <Button
               text="Print PDF"
-              onClick={() => {}}
+              onClick={onPrintPdfClick}
               icon="fi fi-sr-file-pdf"
               variant="secondary"
             />

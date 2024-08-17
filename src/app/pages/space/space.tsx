@@ -5,16 +5,17 @@ import TableWidget from "@/app/widgets/table/table";
 import LinearLoader from "@/app/widgets/components/loader/linear";
 import { db } from "../../firebase/sync";
 import { collection, getDocs } from "firebase/firestore";
+import * as XLSX from "xlsx";
+
 
 interface SpaceLayout {
-  condition: string;
   count: number;
-  Room: string;
-  Space: string;
-  Floor: string;
-  Dimension: string;
-  Assets: number;
-  Condition: string;
+  room: string;
+  space: string;
+  floor: string;
+  dimension: string;
+  assets: number;
+  condition: string;
 }
 
 interface SpaceLayoutProps {
@@ -69,6 +70,48 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
     setActiveFilter(filter);
   };
 
+  const handleExcelClick = () => {
+    try {
+      // Define the desired order of columns
+      const orderedData = filteredData.map(asset => ({
+        Count: asset.count,
+        Room: asset.room,
+        Space: asset.space,
+        Floor: asset.floor,
+        Dimension: asset.dimension,
+        Assets: asset.assets,
+        Condition: asset.condition,
+      }));
+  
+      // Create a worksheet from the ordered data
+      const worksheet = XLSX.utils.json_to_sheet(orderedData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Assets");
+  
+      // Add table headings
+      XLSX.utils.sheet_add_aoa(worksheet, [
+        ["Count", "Item", "Brand", "Location", "Model", "Serial", "Tag", "Condition"],
+      ], { origin: "A1" });
+  
+      // Write the workbook to an Excel file
+      XLSX.writeFile(workbook, "Assets_Data.xlsx");
+      console.log("Data exported to Excel successfully");
+    } catch (error) {
+      console.error("Error exporting data to Excel:", error);
+    }
+  };
+  
+    const handleReportClick = () => {
+      // Logic to generate or download report
+      console.log("Generate Report");
+    };
+  
+    const handlePrintPdfClick = () => {
+      // Logic to print or download as PDF
+      console.log("Print PDF");
+    };
+  
+
   if (loading) {
     return <LinearLoader />;
   }
@@ -114,6 +157,11 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
         filterButtonsOnClick={handleFilterButton}
         itemCounts={itemCounts}
         onSearchInputChange={handleSearchInputChange}
+        tableHeadings={tableHeadings}
+        tableData={filteredData}
+        onExcelClick={handleExcelClick}
+        onReportClick={handleReportClick}
+        onPrintPdfClick={handlePrintPdfClick}
       />
       <TableWidget headings={tableHeadings} data={filteredData} />
     </div>
