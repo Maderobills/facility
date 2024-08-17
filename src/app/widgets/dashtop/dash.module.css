@@ -99,3 +99,19 @@
     align-items: center;
   }
 
+
+  @media (max-width: 1500px) {
+    .title{
+      font-size: 1.4rem;
+      padding: 10px;
+    }
+
+    .inputStyle{
+      height: 30px;
+      max-width: 200px;
+    }
+
+    .itemCounter{
+      font-size: 0.6rem;
+    }
+  }

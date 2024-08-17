@@ -104,7 +104,7 @@
   margin: auto 10px;
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 1500px) {
   .sideMenu {
     max-width: 220px;
   }

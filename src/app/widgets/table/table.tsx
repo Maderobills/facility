@@ -26,7 +26,7 @@ const TableWidget: React.FC<TableWidgetProps> = ({ headings, data }) => {
     <div className={styles.contentBox}>
       <div className={`row ${styles.tableHeading}`}>
         {headings.map((heading, index) => (
-          <div key={index} className={`col ${index === 0 || index === headings.length - 1 ? '1' : ''}`}>
+          <div key={index} className={`col-xl col-2 ${index === 0 || index === headings.length - 1 ? '1' : ''}`}>
             {heading}
           </div>
         ))}
@@ -37,7 +37,7 @@ const TableWidget: React.FC<TableWidgetProps> = ({ headings, data }) => {
           {headings.map((heading, colIndex) => (
             <div
               key={colIndex}
-              className={`col ${colIndex === 0 || colIndex === headings.length - 1 ? '1' : ''}`}
+              className={`col-xl col-2 ${colIndex === 0 || colIndex === headings.length - 1 ? '1' : ''}`}
               style={heading === 'Condition' ? { color: getTextColor(row[heading.toLowerCase()]) } : {}}
             >
               {heading === 'Count' ? (

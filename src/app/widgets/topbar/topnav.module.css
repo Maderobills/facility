@@ -32,3 +32,13 @@
     margin: auto 5px;
    
   }
+
+@media (max-width: 1500px) {
+    .left{
+        font-size: 1.4rem;
+    }
+
+    .right{
+        font-size: .8rem;
+    }
+}

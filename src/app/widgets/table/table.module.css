@@ -42,3 +42,12 @@
    margin-right: 10px;
    cursor: pointer;
 }
+
+@media (max-width: 1500px) {
+    .tableHeading{
+        font-size: 0.8rem;
+    }
+    .tableContent{
+        font-size: 0.6rem;
+    }
+}

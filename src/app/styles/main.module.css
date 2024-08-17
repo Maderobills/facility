@@ -32,5 +32,12 @@
 }
 
 
+@media (max-width: 1500px) {
+    .mainRight{
+        width: calc(100% - 240px);
+        margin: 20px auto;
+    }
+    
 
+}
 

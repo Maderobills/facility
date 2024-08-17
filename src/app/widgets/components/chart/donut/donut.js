@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts3D from 'highcharts/highcharts-3d';
@@ -8,6 +8,27 @@ if (typeof Highcharts === 'object') {
 }
 
 export default function Doughnut3DChart({ data }) {
+    const [chartSize, setChartSize] = useState({ width: 200, height: 200 });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 480) {
+                setChartSize({ width: 120, height: 120 });
+            } else if (window.innerWidth <= 768) {
+                setChartSize({ width: 150, height: 150 });
+            }else if (window.innerWidth <= 1040) {
+                setChartSize({ width: 160, height: 160 });
+            } else {
+                setChartSize({ width: 200, height: 200 });
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const getColor = (name) => {
         switch (name) {
             case 'Good':
@@ -35,17 +56,17 @@ export default function Doughnut3DChart({ data }) {
                 beta: 0,
             },
             backgroundColor: 'transparent',
-            height: 200,
-            width: 200, 
+            height: chartSize.height,
+            width: chartSize.width,
             margin: [0, 0, 0, 0],
             spacing: [0, 0, 0, 0],
         },
         plotOptions: {
             pie: {
                 innerSize: '35%',
-                depth: 20,
+                depth: 15,
                 shadow: false,
-                size: '100%',
+                size: '80%',
                 dataLabels: {
                     enabled: false,
                 },

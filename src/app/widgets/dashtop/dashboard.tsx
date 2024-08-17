@@ -49,7 +49,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
   return (
     <div className={styles.dashboard}>
       <div className="row">
-        <div className="col-8">
+        <div className="col-xl-8 col-lg-6 col-md-4 col-sm-6 col">
           <div className="col-12">
             <div className={styles.title}>
               {titleIconClass && <i className={titleIconClass}></i>}
@@ -59,7 +59,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
           <div className="col-12 px-4 my-2">
             <span className={styles.note}>Filter search to view</span>
             <div className="row">
-              <div className="col">
+              <div className="col-xl-4 col-12">
                 <div className={styles.group}>
                   <div className={styles.icon}>
                     <i className="fi fi-tr-search-alt"></i>
@@ -74,7 +74,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
                   />
                 </div>
               </div>
-              <div className="col">
+              <div className="col-xl col-12">
                 {filterButtons.map((pillText, index) => (
                   <PillButton
                     key={index}
@@ -85,7 +85,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
               </div>
             </div>
           </div>
-          <div className="col-12 px-4 my-4">
+          <div className="col-12 px-3 my-3">
             <div className={styles.itemCounter}>
               {itemCounts.map((item, index) => (
                 <span key={index}>
@@ -95,10 +95,11 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
             </div>
           </div>
         </div>
-        <div className={`col ${styles.chart}`}>
+        <div className="col-xl-4  col-lg-6  col-sm-6 row">
+        <div className={`col-xl-8 col-lg-8  ${styles.chart}`}>
           <Doughnut3DChart data={chartData} />
         </div>
-        <div className="col-2">
+        <div className="col-xl-4 col-lg-4">
           <div className={styles.btnActionGroup}>
             <Button
               text="Excel"
@@ -119,6 +120,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
               variant="secondary"
             />
           </div>
+        </div>
         </div>
       </div>
     </div>
