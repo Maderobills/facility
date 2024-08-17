@@ -127,7 +127,6 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           severity: "success",
         });
   
-        // Reset the form data
         setFormData({
           item: "",
           brand: "",
