@@ -130,6 +130,10 @@
   .navItems > * {
     margin: 0.5rem auto;
   }
+  .out{
+    padding: 5px;
+  }
+  
 }
 
 @media (max-width: 480px) {
