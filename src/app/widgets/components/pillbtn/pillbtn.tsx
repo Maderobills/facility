@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import pillbtnStyles from "./pillbtn.module.css";
 
 interface PillButtonProps {
@@ -7,6 +7,8 @@ interface PillButtonProps {
 }
 
 const PillButton: React.FC<PillButtonProps> = ({ text, onClick }) => {
+  const [isActive, setIsActive] = useState(false);
+
   const getTextColor = (text: string) => {
     switch (text) {
       case 'Good':
@@ -20,11 +22,19 @@ const PillButton: React.FC<PillButtonProps> = ({ text, onClick }) => {
     }
   };
 
+  const handleButtonClick = () => {
+    setIsActive(true);
+    onClick();
+
+    // Optionally reset the active state after some time
+    setTimeout(() => setIsActive(false), 200);
+  };
+
   return (
     <button
       style={{ color: getTextColor(text) }}
-      className={pillbtnStyles.btn}
-      onClick={onClick}
+      className={`${pillbtnStyles.btn} ${isActive ? pillbtnStyles.active : ''}`}
+      onClick={handleButtonClick}
     >
       {text}
     </button>

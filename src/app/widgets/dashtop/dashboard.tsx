@@ -99,13 +99,13 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
             <Button
               text="Report"
               onClick={() => {}}
-              icon="fi fi-sr-file-excel"
+              icon="fi fi-sr-file-word"
               variant="secondary"
             />
             <Button
               text="Print PDF"
               onClick={() => {}}
-              icon="fi fi-sr-file-excel"
+              icon="fi fi-sr-file-pdf"
               variant="secondary"
             />
           </div>

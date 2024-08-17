@@ -9,7 +9,6 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({icon, text, variant, onClick }) => {
-  // Determine the color based on the text value
   const getButtonColor = (variant: string) => {
     switch (variant) {
       case 'primary':

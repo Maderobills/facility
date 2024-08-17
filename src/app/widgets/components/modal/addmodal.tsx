@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AssetFormWidget from '../form/assetform';
+import SpaceFormWidget from '../form/spaceform';
 
 const modalStyle: React.CSSProperties = {
   position: 'absolute',
@@ -25,8 +26,9 @@ interface ModalWidgetProps {
 }
 
 const ModalWidget: React.FC<ModalWidgetProps> = ({ open, onClose, title, description }) => {
-  function handleFormSubmit(formData: { [key: string]: string; }): void {
-    throw new Error('Function not implemented.');
+  function handleFormSubmit(formData: { [key: string]: string }): void {
+    // Implement form submission logic
+    console.log('Form data:', formData);
   }
 
   return (
@@ -43,8 +45,17 @@ const ModalWidget: React.FC<ModalWidgetProps> = ({ open, onClose, title, descrip
         <Typography id="modal-description" sx={{ mt: 2 }}>
           {description}
         </Typography>
-        <AssetFormWidget onSubmit={handleFormSubmit} />
-        <Button onClick={onClose}>Close</Button>
+        
+        {/* Conditional Rendering Based on Title */}
+        {title === "Add Assets" ? (
+          <AssetFormWidget onSubmit={handleFormSubmit} />
+        ) : title === "Add Space Layout" ? (
+          <SpaceFormWidget onSubmit={handleFormSubmit} />
+        ) : (
+          <Typography sx={{ mt: 2 }}>No form available for this title.</Typography>
+        )}
+        
+        <Button sx={{ mt: 2 }} onClick={onClose}>Close</Button>
       </Box>
     </Modal>
   );

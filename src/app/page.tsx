@@ -5,6 +5,8 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import Assets from "./pages/assets/assets";
+import SpaceLayout from "./pages/space/space";
+
 import ModalWidget from "./widgets/components/modal/addmodal";
 
 const Home: React.FC = () => {
@@ -149,7 +151,12 @@ const Home: React.FC = () => {
               display: visibleSection === "space" ? "block" : "none",
             }}
           >
-            <h1>Space Layout</h1>
+            {currentNavItem && (
+              <SpaceLayout
+                dashboardTitle={currentNavItem.title}
+                dashboardIconClass={currentNavItem.iconClass}
+              />
+            )}
           </section>
           <section
             id="assets"
