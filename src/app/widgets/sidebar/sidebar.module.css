@@ -168,6 +168,21 @@
   .navItems > * {
     margin: 0.5rem auto;
   }
+
+  .drop i{
+    font-size: .6rem;
+  }
+
+  .dropdown{
+  margin-top: 0;
+    font-size: .65rem;
+  }
+  
+  .dropdown i{
+    margin: 5px;
+    font-size: 1rem;
+  }
+
   .out{
     padding: 5px;
   }
