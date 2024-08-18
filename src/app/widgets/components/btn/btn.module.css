@@ -7,8 +7,6 @@
     align-items: center;
     border-radius: 5px;
     display: flex;
-    
-    
 }
 
 .btn > *{
@@ -19,5 +17,13 @@
     .btn{
         width: 100px;
         font-size: 0.6rem;
+        padding: 0 5px;
     }
+    .btn > *{
+        margin: auto 5px;
+     }
+     .btn i{
+        font-size: 0.8rem;
+     }
+     
 }

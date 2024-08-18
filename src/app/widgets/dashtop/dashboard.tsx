@@ -49,7 +49,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
   return (
     <div className={styles.dashboard}>
       <div className="row">
-        <div className="col-xl-8 col-lg-6 col-md-4 col-sm-6 col">
+        <div className="col-xl-7 col-lg-5 col-md-4 col-sm-6 col">
           <div className="col-12">
             <div className={styles.title}>
               {titleIconClass && <i className={titleIconClass}></i>}
@@ -95,11 +95,11 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
             </div>
           </div>
         </div>
-        <div className="col-xl-4  col-lg-6  col-sm-6 row">
-        <div className={`col-xl-8 col-lg-8  ${styles.chart}`}>
+        <div className="col-xl-5  col-lg-7 row">
+        <div className={`col-xl-8 col-lg-7  ${styles.chart}`}>
           <Doughnut3DChart data={chartData} />
         </div>
-        <div className="col-xl-4 col-lg-4">
+        <div className="col-xl-4 col-lg-5">
           <div className={styles.btnActionGroup}>
             <Button
               text="Excel"
