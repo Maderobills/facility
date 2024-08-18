@@ -5,7 +5,7 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import Assets from "./pages/assets/assets";
-import SpaceLayout from "./pages/space/space";
+import SpaceLayout from "./pages/assets/assets";
 
 import ModalWidget from "./widgets/components/modal/addmodal";
 
@@ -90,6 +90,26 @@ const Home: React.FC = () => {
       onClick: () => handleNavClick("reports"),
       view: true,
       title: "Overview",
+    },
+    {
+      id: 'settings',
+      iconClass: 'fi fi-rr-settings',
+      label: 'Settings',
+      onClick: () => handleNavClick('settings'),
+      children: [
+        {
+          id: 'profile',
+          iconClass: 'fi fi-rr-user',
+          label: 'Profile',
+          onClick: () => handleNavClick('profile'),
+        },
+        {
+          id: 'account',
+          iconClass: 'fi fi-rr-lock',
+          label: 'Account',
+          onClick: () => handleNavClick('account'),
+        },
+      ],
     },
   ];
 

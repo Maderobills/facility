@@ -74,7 +74,10 @@
 
 .navItems {
   height: 90%;
+  overflow: hidden;
   overflow-y: auto;
+  width: 100%;
+  
 }
 
 .navItems i {
@@ -83,7 +86,16 @@
 }
 
 .navItems > * {
-  margin: 0.8rem auto;
+  margin: 0.8rem 0;
+  cursor: pointer;
+  
+}
+
+.navLink{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .out {
@@ -103,6 +115,16 @@
   display: flex;
   margin: auto 10px;
 }
+
+.active {
+  background-color: #d6d9d4;
+  color: #212a31;
+  border-radius: 5px;
+  padding: 0px 5px;
+  
+}
+
+
 
 @media (max-width: 1500px) {
   .sideMenu {

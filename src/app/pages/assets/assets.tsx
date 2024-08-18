@@ -28,8 +28,8 @@ interface Asset {
 }
 
 interface AssetsProps {
-  dashboardTitle: string;
-  dashboardIconClass: string;
+  dashboardTitle?: string;
+  dashboardIconClass?: string;
 }
 
 

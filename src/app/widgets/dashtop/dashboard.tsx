@@ -12,7 +12,7 @@ interface DashboardWidgetProps {
   itemCounts: { label: string; count: number }[];
   onSearchInputChange: (input: string) => void;
   tableHeadings: string[];
-  tableData: any[]; // Add this line to accept the table data
+  tableData: any[];
   onExcelClick: () => void;
   onReportClick: () => void;
   onPrintPdfClick: () => void;
