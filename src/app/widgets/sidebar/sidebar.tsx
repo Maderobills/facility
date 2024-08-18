@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import Grow from '@mui/material/Grow';
 import sidebarStyle from './sidebar.module.css';
+import { Box } from '@mui/material';
 
 interface NavItem {
   id: string;
@@ -67,10 +69,8 @@ const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navI
                 }
               }}
             >
-              <div className={sidebarStyle.mainItem}>
               <i className={classNames(item.iconClass)}></i>
               <span>{item.label}</span>
-              </div>
               <div className={sidebarStyle.drop}>
               {item.children && (
                 <i
@@ -84,9 +84,18 @@ const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navI
               </div>
             </div>
 
-            {item.children && activeDropdown === item.id && (
-              <ul className={sidebarStyle.dropdown}>
-                {item.children.map((child) => (
+            {item.children && (
+              <Grow
+              in={activeDropdown === item.id}
+              style={{ transformOrigin: 'top left' }}
+              timeout={1000}
+            >
+              <Box
+                component="ul"
+                className={sidebarStyle.dropdown}
+                sx={{ m: 0, p: 0, listStyle: 'none' }}
+              >
+                {item.children?.map((child) => (
                   <li key={child.id} className={sidebarStyle.dropdownItem}>
                     <a href={`#${child.id}`} onClick={child.onClick}>
                       <i className={classNames(child.iconClass)}></i>
@@ -94,7 +103,8 @@ const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navI
                     </a>
                   </li>
                 ))}
-              </ul>
+              </Box>
+            </Grow>
             )}
           </li>
         ))}
