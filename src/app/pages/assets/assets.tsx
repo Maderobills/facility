@@ -201,9 +201,8 @@ const handleReportClick = async () => {
   const handlePrintPdfClick = () => {
     try {
       const doc = new jsPDF();
-      doc.text('Assets Report', 14, 20);
+      doc.text('Assets PDF', 14, 20);
       const tableColumnHeaders = [
-        'Count',
         'Item',
         'Brand',
         'Location',
@@ -214,7 +213,6 @@ const handleReportClick = async () => {
       ];
 
       const tableRows = tableData.map(asset => [
-        asset.count,
         asset.item,
         asset.brand,
         asset.location,
