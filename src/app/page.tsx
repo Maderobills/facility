@@ -125,6 +125,11 @@ const Home: React.FC = () => {
   const [visibleSection, setVisibleSection] = useState("dashboard");
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer2 = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -153,7 +158,32 @@ const Home: React.FC = () => {
       <div onClick={toggleDrawer} className={`${mainStyle.menuButton} ${drawerOpen ? mainStyle.hidden : ""}`}>
         <i className="fi fi-br-grid"></i>
       </div>
-
+      <div className={mainStyle.mainToggle} onClick={toggleDrawer2(true)}>
+      <i className="fi fi-br-grid"></i>
+    </div>
+      <div className={mainStyle.sideMenu}>
+      <Drawer
+       open={open} onClose={toggleDrawer2(false)}
+       PaperProps={{
+        style: {
+          width: '600px',
+          backgroundColor: "transparent",
+          border: 'none',
+          borderRadius: '15px 5px 5px 15px',
+          padding: 10,
+        },
+      }}
+       >
+      
+      <Sidebar
+          adminUserIcon="fi fi-sr-user-pen"
+          username="Shekinah"
+          isUser="OtherUser"
+          navItems={navItems}
+          onLogout={() => console.log("Logging out")}
+          onClick={toggleDrawer2(false)}
+        />
+      </Drawer></div>
      <div className={mainStyle.sideMenu}>
      <Drawer
         variant="persistent"
@@ -178,6 +208,7 @@ const Home: React.FC = () => {
           onClick={toggleDrawer}
         />
       </Drawer>
+      
      </div>
 
       <main
