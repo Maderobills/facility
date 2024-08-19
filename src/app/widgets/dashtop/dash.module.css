@@ -147,8 +147,10 @@
   }
 
   .actionIcons{
-    display: block;
-    color: #212a31;
+    display: flex;
+    color: #124E66;
+    justify-content: space-evenly;
+    align-items: center;
   }
 
   .title > *{
@@ -165,8 +167,10 @@
 
   .filter div{
     padding: 0;
+    align-items: center;
   }
-  
+
+
   .dashRight .export{
     display: none;
   }

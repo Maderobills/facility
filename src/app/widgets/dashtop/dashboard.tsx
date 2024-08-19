@@ -56,11 +56,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
               {titleIconClass && <i className={titleIconClass}></i>}
               <h2>{title}</h2>
             </div>
-            <div className={styles.actionIcons}>
-              <i onClick={onExcelClick} className="fi fi-sr-file-excel"></i>
-              <i onClick={onReportClick}  className="fi fi-sr-file-word"></i>
-              <i onClick={onPrintPdfClick}  className="fi fi-sr-file-pdf"></i>
-            </div>
+            
             </div>
           </div>
           <div className={styles.filter}>
@@ -82,7 +78,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
                     />
                   </div>
                 </div>
-                <div className="col-xl-8 col-lg-7 col-sm-12 col-12">
+                <div className="col-xl-8 col-lg-7 col-sm-12 col-12 my-2">
                   {filterButtons.map((pillText, index) => (
                     <PillButton
                       key={index}
@@ -93,7 +89,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
                 </div>
               </div>
             </div>
-            <div className="col-12 my-2">
+            <div className="col-12">
               <div className={styles.itemCounter}>
                 {itemCounts.map((item, index) => (
                   <span key={index}>
@@ -133,6 +129,11 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
               />
             </div>
           </div>
+          <div className={styles.actionIcons}>
+              <i onClick={onExcelClick} className="fi fi-sr-file-excel"></i>
+              <i onClick={onReportClick}  className="fi fi-sr-file-word"></i>
+              <i onClick={onPrintPdfClick}  className="fi fi-sr-file-pdf"></i>
+            </div>
         </div>
       </div>
     </div>

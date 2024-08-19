@@ -79,9 +79,7 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
 
   const handleExcelClick = () => {
     try {
-      // Define the desired order of columns
       const orderedData = filteredData.map(asset => ({
-        Count: asset.count,
         Room: asset.room,
         Space: asset.space,
         Floor: asset.floor,
@@ -90,18 +88,15 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
         Condition: asset.condition,
       }));
   
-      // Create a worksheet from the ordered data
       const worksheet = XLSX.utils.json_to_sheet(orderedData);
       const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Assets");
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Space Layout Data");
   
-      // Add table headings
       XLSX.utils.sheet_add_aoa(worksheet, [
-        ["Count", "Item", "Brand", "Location", "Model", "Serial", "Tag", "Condition"],
+        ["Room", "Space", "Floor", "Dimension", "Assets", "Condition"],
       ], { origin: "A1" });
   
-      // Write the workbook to an Excel file
-      XLSX.writeFile(workbook, "Assets_Data.xlsx");
+      XLSX.writeFile(workbook, "Space_Layout_Data.xlsx");
       console.log("Data exported to Excel successfully");
     } catch (error) {
       console.error("Error exporting data to Excel:", error);
@@ -181,7 +176,6 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
         ],
       });
   
-      // Convert the document to a blob and save it
       const blob = await Packer.toBlob(doc);
       saveAs(blob, 'Facility_Manager_Report.docx');
   
@@ -195,7 +189,7 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
   const handlePrintPdfClick = () => {
     try {
       const doc = new jsPDF();
-      doc.text('Assets Report', 14, 20);
+      doc.text('Space Layout PDF', 14, 20);
       const tableColumnHeaders = [
         'Room',
         'Space',
@@ -222,7 +216,7 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
         margin: { top: 20 },
       });
 
-      doc.save('Assets_Report.pdf');
+      doc.save('Space_Layout_Report.pdf');
       console.log('PDF generated and downloaded successfully');
     } catch (error) {
       console.error('Error generating PDF:', error);
