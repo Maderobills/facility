@@ -124,7 +124,7 @@ const Home: React.FC = () => {
 
   const [visibleSection, setVisibleSection] = useState("dashboard");
   const [modalOpen, setModalOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer2 = (newOpen: boolean) => () => {
