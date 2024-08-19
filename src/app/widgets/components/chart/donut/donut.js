@@ -66,7 +66,7 @@ export default function Doughnut3DChart({ data }) {
                 innerSize: '35%',
                 depth: 15,
                 shadow: false,
-                size: '80%',
+                size: '100%',
                 dataLabels: {
                     enabled: false,
                 },

@@ -46,3 +46,22 @@
         font-size: .8rem;
     }
 }
+
+
+@media (max-width: 700px) {
+    .topbar{
+        padding: 4px 8px;
+    }
+
+    .left{
+        font-size: 0.8rem;
+    }
+
+    .left i{
+margin: 5px;
+    }
+
+    .right{
+        font-size: .6rem;
+    }
+}

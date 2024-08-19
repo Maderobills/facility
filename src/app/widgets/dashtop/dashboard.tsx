@@ -49,18 +49,25 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
   return (
     <div className={styles.dashboard}>
       <div className="row">
-        <div className="col-xxl-8 col-xl-8 col-lg-7 col-md-5 col-sm-12">
+        <div className="col-xxl-8 col-xl-8 col-lg-7 col-md-5 col-sm-7 col-7 row">
           <div className="col-12">
+            <div className={styles.dashTop}>
             <div className={styles.title}>
               {titleIconClass && <i className={titleIconClass}></i>}
               <h2>{title}</h2>
             </div>
+            <div className={styles.actionIcons}>
+              <i onClick={onExcelClick} className="fi fi-sr-file-excel"></i>
+              <i onClick={onReportClick}  className="fi fi-sr-file-word"></i>
+              <i onClick={onPrintPdfClick}  className="fi fi-sr-file-pdf"></i>
+            </div>
+            </div>
           </div>
           <div className={styles.filter}>
-            <div className="col-12 px-4 my-2 col-sm-12">
+            <div className=" col-sm-12 col-12">
               <span className={styles.note}>Filter search to view</span>
               <div className="row">
-                <div className="col-xl-4 col-lg-5 col-12">
+                <div className="col-xl-4 col-lg-5 col-sm-12 col-12">
                   <div className={styles.group}>
                     <div className={styles.icon}>
                       <i className="fi fi-tr-search-alt"></i>
@@ -69,13 +76,13 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
                       className={styles.inputStyle}
                       type="text"
                       placeholder="Type to search"
-                      id="search"
+                      id="searchFilter"
                       name="search"
                       onChange={handleInputChange}
                     />
                   </div>
                 </div>
-                <div className="col-xl col-lg-7 col-12">
+                <div className="col-xl-8 col-lg-7 col-sm-12 col-12">
                   {filterButtons.map((pillText, index) => (
                     <PillButton
                       key={index}
@@ -86,7 +93,7 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
                 </div>
               </div>
             </div>
-            <div className="col-12 px-3 my-3">
+            <div className="col-12 my-2">
               <div className={styles.itemCounter}>
                 {itemCounts.map((item, index) => (
                   <span key={index}>
@@ -97,11 +104,10 @@ const DashboardWidget: React.FC<DashboardWidgetProps> = ({
             </div>
           </div>
         </div>
-        <div
-          className={`col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-12 row ${styles.dashRight}`}
+        <div className={`col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-5 col row ${styles.dashRight}`}
         >
           <div
-            className={`col-xl-8 col-lg-7 col-md-8 col-sm-12 ${styles.chart}`}
+            className={`col-xl-8 col-lg-7 col-md-8 col-sm-12 col ${styles.chart}`}
           >
             <Doughnut3DChart data={chartData} />
           </div>

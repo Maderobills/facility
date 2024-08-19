@@ -51,3 +51,12 @@
         font-size: 0.6rem;
     }
 }
+
+@media (max-width: 700px) {
+    .tableHeading{
+        font-size: 0.6rem;
+    }
+    .tableContent{
+        font-size: 0.45rem;
+    }
+}

@@ -8,6 +8,22 @@
 
 }
 
+.dashTop{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.actionIcons{
+  display: none;
+}
+
+.actionIcons > *{
+  margin: 0 3px;
+}
+
+
 .title{
     display: flex;
     margin: 0;
@@ -34,7 +50,6 @@
     line-height: 20px;
     align-items: center;
     position: relative;
-   
   }
 
   .inputStyle {
@@ -68,6 +83,7 @@
     width: 1rem;
     height: 1rem;
     color: #000000a0;
+    
   }
 
 
@@ -88,6 +104,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: fit-content;
   }
 
   .btnActionGroup{
@@ -99,6 +116,9 @@
     align-items: center;
   }
 
+  .filter{
+    margin: 30px;
+  }
 
   @media (max-width: 1500px) {
     .dashboard{
@@ -119,10 +139,28 @@
     }
   }
 
- @media (max-width: 600px) {
+ @media (max-width: 767px) {
   
+  .filter{
+    margin: 20px;
+    padding: auto;
+  }
+
+  .actionIcons{
+    display: block;
+    color: #212a31;
+  }
+
   .title > *{
     font-size: 1.1rem;
+  }
+
+  .itemCounter{
+    width: 100%;
+  }
+
+  .icon i{
+    display: flex;
   }
 
   .filter div{
