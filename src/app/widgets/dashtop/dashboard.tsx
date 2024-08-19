@@ -5,8 +5,8 @@ import Doughnut3DChart from "../components/chart/donut/donut";
 import Button from "../components/btn/btn";
 
 interface DashboardWidgetProps {
-  titleIconClass: string;
-  title: string;
+  titleIconClass?: string;
+  title?: string;
   filterButtons: string[];
   filterButtonsOnClick: (filter: string) => void;
   itemCounts: { label: string; count: number }[];
