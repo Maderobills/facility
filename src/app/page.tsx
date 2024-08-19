@@ -5,9 +5,10 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "./widgets/topbar/topbar";
 import Sidebar from "./widgets/sidebar/sidebar";
 import Assets from "./pages/assets/assets";
-import SpaceLayout from "./pages/assets/assets";
+import SpaceLayout from "./pages/space/space";
 
 import ModalWidget from "./widgets/components/modal/addmodal";
+import Drawer from '@mui/material/Drawer';
 
 const Home: React.FC = () => {
   const navItems = [
@@ -26,6 +27,14 @@ const Home: React.FC = () => {
       onClick: () => handleNavClick("space"),
       view: true,
       title: "Overview",
+      children: [
+        {
+          id: "space",
+          iconClass: "fi fi-rr-rectangles-mixed",
+          label: "Layouts",
+          onClick: () => handleNavClick("space"),
+        },
+      ],
     },
     {
       id: "maintenance",
@@ -92,22 +101,22 @@ const Home: React.FC = () => {
       title: "Overview",
     },
     {
-      id: 'settings',
-      iconClass: 'fi fi-rr-settings',
-      label: 'Settings',
-      onClick: () => handleNavClick('settings'),
+      id: "settings",
+      iconClass: "fi fi-rr-settings",
+      label: "Settings",
+      onClick: () => handleNavClick("settings"),
       children: [
         {
-          id: 'profile',
-          iconClass: 'fi fi-rr-user',
-          label: 'Profile',
-          onClick: () => handleNavClick('profile'),
+          id: "profile",
+          iconClass: "fi fi-rr-user",
+          label: "Profile",
+          onClick: () => handleNavClick("profile"),
         },
         {
-          id: 'account',
-          iconClass: 'fi fi-rr-lock',
-          label: 'Account',
-          onClick: () => handleNavClick('account'),
+          id: "account",
+          iconClass: "fi fi-rr-lock",
+          label: "Account",
+          onClick: () => handleNavClick("account"),
         },
       ],
     },
@@ -115,6 +124,11 @@ const Home: React.FC = () => {
 
   const [visibleSection, setVisibleSection] = useState("dashboard");
   const [modalOpen, setModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(true);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   const handleNavClick = (href: string) => {
     setVisibleSection(href);
@@ -133,18 +147,46 @@ const Home: React.FC = () => {
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
+
   return (
     <div className={mainStyle.main}>
-      <div className={mainStyle.sideMenu}>
+      <div onClick={toggleDrawer} className={`${mainStyle.menuButton} ${drawerOpen ? mainStyle.hidden : ""}`}>
+        <i className="fi fi-br-grid"></i>
+      </div>
+
+     <div className={mainStyle.sideMenu}>
+     <Drawer
+        variant="persistent"
+        anchor="left"
+        open={drawerOpen}
+        PaperProps={{
+          style: {
+            backgroundColor: "transparent",
+            border: 'none',
+            borderRadius: '15px 5px 5px 15px',
+            padding: 10,
+          },
+        }}
+        
+      >
         <Sidebar
           adminUserIcon="fi fi-sr-user-pen"
           username="Shekinah"
           isUser="OtherUser"
           navItems={navItems}
           onLogout={() => console.log("Logging out")}
+          onClick={toggleDrawer}
         />
-      </div>
-      <main className={mainStyle.mainRight}>
+      </Drawer>
+     </div>
+
+      <main
+        className={mainStyle.mainRight}
+        style={{
+          marginLeft: drawerOpen ? "240px" : "0px",
+          transition: "margin 0.3s",
+        }}
+      >
         {currentNavItem && (
           <Topbar
             iconLeft={currentNavItem.iconClass}
@@ -163,7 +205,6 @@ const Home: React.FC = () => {
             }}
           >
             <h1>DashBoard</h1>
-           
           </section>
           <section
             id="space"
@@ -196,11 +237,11 @@ const Home: React.FC = () => {
 
       {currentNavItem && (
         <ModalWidget
-        open={modalOpen}
-        onClose={handleModalClose}
-        title={"Add " + currentNavItem.label}
-        description="This is content inside the dashboard modal."
-      />
+          open={modalOpen}
+          onClose={handleModalClose}
+          title={"Add " + currentNavItem.label}
+          description="This is content inside the dashboard modal."
+        />
       )}
     </div>
   );

@@ -7,9 +7,30 @@
     padding: 0.5%;
 }
 
+.menuButton{
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+    padding: 0;
+    top: 0;
+    left: 0;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+
+.menuButton i{
+    font-size: 1.4rem;
+    color: #748D92;
+}
+
+.hidden {
+    opacity: 0;
+  }
+
 .mainRight{
-    width: calc(100% - 320px);
-    margin: 20px auto;
+    width: 100%;
+    margin: 20px 10px;
 }
 
 .content{
@@ -34,10 +55,11 @@
 
 @media (max-width: 1500px) {
     .mainRight{
-        width: calc(100% - 240px);
-        margin: 20px auto;
+        margin-left: 0;
     }
-    
-
+    .hidden{
+        display: none;
+    }
 }
+
 

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import classNames from 'classnames';
-import Grow from '@mui/material/Grow';
-import sidebarStyle from './sidebar.module.css';
-import { Box } from '@mui/material';
+import React, { useState } from "react";
+import classNames from "classnames";
+import Grow from "@mui/material/Grow";
+import sidebarStyle from "./sidebar.module.css";
+import { Box } from "@mui/material";
 
 interface NavItem {
   id: string;
@@ -17,10 +17,18 @@ interface SidebarProps {
   username: string;
   isUser: string;
   navItems: NavItem[];
+  onClick: () => void;
   onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navItems, onLogout }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  adminUserIcon,
+  username,
+  isUser,
+  navItems,
+  onClick,
+  onLogout,
+}) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleDropdown = (id: string) => {
@@ -34,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navI
           <i className={classNames(adminUserIcon)}></i>
           <span>{username}</span>
         </div>
-        <div>
+        <div onClick={onClick}>
           <i className="fi fi-br-arrow-small-left"></i>
         </div>
       </div>
@@ -72,39 +80,41 @@ const Sidebar: React.FC<SidebarProps> = ({ adminUserIcon, username, isUser, navI
               <i className={classNames(item.iconClass)}></i>
               <span>{item.label}</span>
               <div className={sidebarStyle.drop}>
-              {item.children && (
-                <i
-                  className={classNames('fi', {
-                    'fi-br-angle-small-down': activeDropdown !== item.id,
-                    'fi-br-angle-small-up': activeDropdown === item.id,
-                    [sidebarStyle.rotateIcon]: true,
-                  })}
-                ></i>
-              )}
+                {item.children && (
+                  <i
+                    className={classNames("fi", {
+                      "fi-br-angle-small-down": activeDropdown !== item.id,
+                      "fi-br-angle-small-up": activeDropdown === item.id,
+                      [sidebarStyle.rotateIcon]: true,
+                    })}
+                  ></i>
+                )}
               </div>
             </div>
 
             {item.children && (
               <Grow
-              in={activeDropdown === item.id}
-              style={{ transformOrigin: 'top left' }}
-              timeout={1000}
-            >
-              <Box
-                component="ul"
-                className={sidebarStyle.dropdown}
-                sx={{ m: 0, p: 0, listStyle: 'none' }}
+                in={activeDropdown === item.id}
+                style={{ transformOrigin: "top left" }}
+                timeout={1000}
               >
-                {item.children?.map((child) => (
-                  <li key={child.id} className={sidebarStyle.dropdownItem}>
-                    <a href={`#${child.id}`} onClick={child.onClick}>
-                      <i className={classNames(child.iconClass)}></i>
-                      <span>{child.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </Box>
-            </Grow>
+                <Box
+                  component="ul"
+                  className={classNames(sidebarStyle.dropdown, {
+                    [sidebarStyle.dropdownVisible]: activeDropdown === item.id,
+                  })}
+                  sx={{ m: 0, p: 0, listStyle: "none" }}
+                >
+                  {item.children.map((child) => (
+                    <li key={child.id} className={sidebarStyle.dropdownItem}>
+                      <a href={`#${child.id}`} onClick={child.onClick}>
+                        <i className={classNames(child.iconClass)}></i>
+                        <span>{child.label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </Box>
+              </Grow>
             )}
           </li>
         ))}

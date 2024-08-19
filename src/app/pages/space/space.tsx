@@ -26,8 +26,8 @@ interface SpaceLayout {
 }
 
 interface SpaceLayoutProps {
-  dashboardTitle: string;
-  dashboardIconClass: string;
+  dashboardTitle?: string;
+  dashboardIconClass?: string;
 }
 
 const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass }) => {

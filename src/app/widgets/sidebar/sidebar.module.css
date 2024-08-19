@@ -1,6 +1,5 @@
 .sideMenu {
   background-color: #212a31;
-  max-width: 300px;
   border-radius: 15px 5px 5px 15px;
   box-shadow: 2px 2px 15px 0px #212a3150;
   color: #d6d9d4;
@@ -8,7 +7,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  top: 0;
+  width: fit-content;
+
 }
 
 .sideMenu a {
@@ -92,6 +92,7 @@
 .navItems > * {
   margin: 0.5rem 0;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
   
 }
 
@@ -117,11 +118,16 @@
   margin: 10px 10px;
   padding: 0 20px;
   font-size: .8rem;
+  display: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .dropdown i{
   margin: 5px;
   font-size: 1.2rem;
+}
+.dropdownVisible {
+  display: block;
 }
 
 .out {
@@ -143,9 +149,10 @@
 }
 
 @media (max-width: 1500px) {
-  .sideMenu {
+  .sideMenu{
     max-width: 220px;
   }
+
   .top{
     font-size: 1.1rem;
   }
