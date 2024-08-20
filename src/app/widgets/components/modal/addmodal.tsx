@@ -11,7 +11,7 @@ const modalStyle: React.CSSProperties = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '500px',
+  width: '400px',
   backgroundColor: '#d6d9d4',
   borderRadius: '5px',
   boxShadow: '24px 24px 48px rgba(0, 0, 0, 0.1)',

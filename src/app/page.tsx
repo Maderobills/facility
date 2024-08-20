@@ -138,7 +138,6 @@ const Home: React.FC = () => {
   const handleNavClick = (href: string) => {
     setVisibleSection(href);
     console.log(`Navigating to ${href}`);
-    toggleDrawer2(false);
   };
 
   useEffect(() => {

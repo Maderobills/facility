@@ -184,6 +184,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           error={!!errors.item}
           helperText={errors.item}
           sx={{ flex: 1 }}
+          size="small"
         />
         <CustomTextField
           id="brand"
@@ -192,6 +193,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           value={formData.brand}
           onChange={handleChange}
           sx={{ flex: 1 }}
+           size="small"
         />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
@@ -207,6 +209,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           helperText={errors.location}
           select
           sx={{ flex: 1 }}
+           size="small"
         >
           {locations.map((loc) => (
             <MenuItem key={loc} value={loc}>
@@ -222,6 +225,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           value={formData.model}
           onChange={handleChange}
           sx={{ flex: 1 }}
+           size="small"
         />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
@@ -232,6 +236,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           value={formData.serial}
           onChange={handleChange}
           sx={{ flex: 1 }}
+           size="small"
         />
         <CustomTextField
           id="tag"
@@ -243,6 +248,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           error={!!errors.tag}
           helperText={errors.tag}
           sx={{ flex: 1 }}
+           size="small"
         />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
@@ -255,6 +261,7 @@ const AssetFormWidget: React.FC<AssetFormProps> = ({ onSubmit }) => {
           value={formData.condition}
           onChange={handleChange}
           sx={{ flex: 1 }}
+           size="small"
         >
           <MenuItem value="Good">Good</MenuItem>
           <MenuItem value="Repair">Repair</MenuItem>

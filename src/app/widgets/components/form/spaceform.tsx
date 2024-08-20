@@ -137,6 +137,7 @@ const SpaceFormWidget: React.FC<SpaceFormProps> = ({ onSubmit }) => {
           required
           error={!!errors.room}
           helperText={errors.room}
+          size="small"
         />
         <CustomTextField
           id="space"
@@ -144,6 +145,7 @@ const SpaceFormWidget: React.FC<SpaceFormProps> = ({ onSubmit }) => {
           variant="outlined"
           value={formData.space}
           onChange={handleChange}
+          size="small"
         />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
@@ -156,6 +158,7 @@ const SpaceFormWidget: React.FC<SpaceFormProps> = ({ onSubmit }) => {
           required
           error={!!errors.floor}
           helperText={errors.floor}
+          size="small"
         />
         <CustomTextField
           id="dimension"
@@ -163,6 +166,7 @@ const SpaceFormWidget: React.FC<SpaceFormProps> = ({ onSubmit }) => {
           variant="outlined"
           value={formData.dimension}
           onChange={handleChange}
+          size="small"
         />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
@@ -174,6 +178,7 @@ const SpaceFormWidget: React.FC<SpaceFormProps> = ({ onSubmit }) => {
           select
           value={formData.condition}
           onChange={handleChange}
+          size="small"
         >
           <MenuItem value="Good">Good</MenuItem>
           <MenuItem value="Repair">Repair</MenuItem>
