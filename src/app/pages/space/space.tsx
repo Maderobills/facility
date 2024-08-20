@@ -106,7 +106,7 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
   const handleReportClick = async () => {
     try {
       // Format the table data into a readable string
-      const formattedTableData = tableData.map(item => `
+      const formattedTableData = filteredData.map(item => `
         Room: ${item.room}
         Space: ${item.space}
         Condition: ${item.condition}
@@ -199,7 +199,7 @@ const Assets: React.FC<SpaceLayoutProps> = ({ dashboardTitle, dashboardIconClass
         'Condition',
       ];
 
-      const tableRows = tableData.map(asset => [
+      const tableRows = filteredData.map(asset => [
         asset.room,
         asset.space,
         asset.floor,
