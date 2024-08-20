@@ -91,6 +91,20 @@ const Home: React.FC = () => {
       onClick: () => handleNavClick("services"),
       view: true,
       title: "Overview",
+      children: [
+        {
+          id: "workdone",
+          iconClass: "fi fi-rr-user",
+          label: "Work done",
+          onClick: () => handleNavClick("services"),
+        },
+        {
+          id: "jobdone",
+          iconClass: "fi fi-rr-lock",
+          label: "Job Done",
+          onClick: () => handleNavClick("jobdone"),
+        },
+      ],
     },
     {
       id: "reports",
