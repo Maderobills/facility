@@ -96,7 +96,7 @@ const Home: React.FC = () => {
       id: "reports",
       iconClass: "fi fi-sr-newspaper",
       label: "Reports",
-      onClick: () => handleNavClick("reports"),
+      onClick: () => {handleNavClick("reports")},
       view: true,
       title: "Overview",
     },
@@ -138,6 +138,7 @@ const Home: React.FC = () => {
   const handleNavClick = (href: string) => {
     setVisibleSection(href);
     console.log(`Navigating to ${href}`);
+    toggleDrawer2(false)();
   };
 
   useEffect(() => {
