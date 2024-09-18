@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { auth, db } from '../../firebase/sync';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import HomePage from '../page';
 
 type AuthMode = 'login' | 'register' | 'reset';
 
@@ -10,57 +14,72 @@ const Auth: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+  
     try {
-      let response;
-      
+      let userCredential;
       switch (mode) {
         case 'login':
-          response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
+          userCredential = await signInWithEmailAndPassword(auth, email, password);
+          setIsLoggedIn(true);
+          await storeUserData(userCredential.user.uid);
           break;
         case 'register':
           if (password !== confirmPassword) {
             alert("Passwords don't match");
             return;
           }
-          response = await fetch('/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
+          userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          alert('Registration successful!');
+          setMode('login');
+          await storeUserData(userCredential.user.uid);
           break;
         case 'reset':
-          response = await fetch('/api/reset-password', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
-          });
-          break;
-      }
-
-      if (response && response.ok) {
-        if (mode === 'login') {
-          router.push('../page.tsx'); 
-        } else {
-          alert(mode === 'register' ? 'Registration successful!' : 'Password reset email sent!');
+          await sendPasswordResetEmail(auth, email);
+          alert('Password reset email sent!');
           setMode('login');
-        }
-      } else {
-        throw new Error('Request failed');
+          break;
       }
     } catch (error) {
       console.error('An error occurred:', error);
       alert('An error occurred. Please try again.');
     }
   };
+  
+  const storeUserData = async (userId: string) => {
+    try {
+      const userDocRef = doc(db, 'Managers', userId);
+      const userDocSnap = await getDoc(userDocRef);
+      
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data();
+  
+        sessionStorage.setItem('user', JSON.stringify({
+          id: userId,
+          firstName: userData?.FirstName || '',
+          lastName: userData?.LastName || '',
+          email: userData?.Email || '',
+          contact: userData?.Contact || '',
+          role: userData?.Role || ''
+        }));
+  
+        console.log('User data stored in session');
+      } else {
+        console.log('No user data found!');
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+  
+  if (isLoggedIn) {
+    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    return <HomePage username={`${user.firstName || ''}`} />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

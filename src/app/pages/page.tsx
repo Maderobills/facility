@@ -1,16 +1,32 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import mainStyle from "./styles/main.module.css";
+import mainStyle from "../styles/main.module.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
 import Topbar from "../widgets/topbar/topbar";
 import Sidebar from "../widgets/sidebar/sidebar";
 import Assets from "../pages/assets/assets";
 import SpaceLayout from "../pages/space/space";
-
+import { signOut } from 'firebase/auth';
 import ModalWidget from "../widgets/components/modal/addmodal";
 import Drawer from '@mui/material/Drawer';
+import { auth } from "../firebase/sync";
+import { useRouter } from 'next/navigation';
+import Auth from "./auth/Auth";
 
-const Home: React.FC = () => {
+
+
+interface Props {
+  username: string;
+}
+
+const Home: React.FC<Props> = ({ username }) => {
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const router = useRouter();
+
+  // Retrieve the saved section or default to 'dashboard'
+  const savedSection = sessionStorage.getItem('visibleSection') || 'dashboard';
+  const [visibleSection, setVisibleSection] = useState(savedSection);
+
   const navItems = [
     {
       id: "dashboard",
@@ -122,21 +138,16 @@ const Home: React.FC = () => {
     },
   ];
 
-  const [visibleSection, setVisibleSection] = useState("dashboard");
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const toggleDrawer2 = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
-
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
-  };
+  const toggleDrawer2 = (newOpen: boolean) => () => setOpen(newOpen);
+  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
   const handleNavClick = (href: string) => {
     setVisibleSection(href);
+    sessionStorage.setItem('visibleSection', href); // Save section to sessionStorage
     console.log(`Navigating to ${href}`);
   };
 
@@ -147,12 +158,28 @@ const Home: React.FC = () => {
     }
   }, [visibleSection]);
 
-  const currentNavItem = navItems.find((item) => item.id === visibleSection);
-
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      sessionStorage.clear();  // Clear session storage on logout
+      setIsLoggedOut(true);
+      router.push('/');
+      console.log('Logging out');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
 
+  if (isLoggedOut) {
+    return <Auth />;
+  }
+
+  const currentNavItem = navItems.find((item) => item.id === visibleSection);
+
+  
   return (
     <div className={mainStyle.main}>
       <div onClick={toggleDrawer} className={`${mainStyle.menuButton} ${drawerOpen ? mainStyle.hidden : ""}`}>
@@ -177,7 +204,7 @@ const Home: React.FC = () => {
       
       <Sidebar
           adminUserIcon="fi fi-sr-user-pen"
-          username="Shekinah"
+          username={username}
           isUser="OtherUser"
           navItems={navItems}
           onLogout={() => console.log("Logging out")}
@@ -201,10 +228,10 @@ const Home: React.FC = () => {
       >
         <Sidebar
           adminUserIcon="fi fi-sr-user-pen"
-          username="Shekinah"
+          username={username}
           isUser="OtherUser"
           navItems={navItems}
-          onLogout={() => console.log("Logging out")}
+          onLogout={handleLogout}
           onClick={toggleDrawer}
         />
       </Drawer>
