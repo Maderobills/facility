@@ -79,7 +79,7 @@ const Assets: React.FC<AssetsProps> = ({ dashboardTitle, dashboardIconClass }) =
 const handleReportClick = async () => {
   try {
     // Format the table data into a readable string
-    const formattedTableData = tableData.map(item => `
+    const formattedTableData = filteredData.map(item => `
       Item: ${item.item}
       Brand: ${item.brand}
       Location: ${item.location}
@@ -173,7 +173,7 @@ const handleReportClick = async () => {
 
   const handleExcelClick = () => {
     try {
-      const orderedData = tableData.map(asset => ({
+      const orderedData = filteredData.map(asset => ({
         Count: asset.count,
         Item: asset.item,
         Brand: asset.brand,
@@ -212,7 +212,7 @@ const handleReportClick = async () => {
         'Condition',
       ];
 
-      const tableRows = tableData.map(asset => [
+      const tableRows = filteredData.map(asset => [
         asset.item,
         asset.brand,
         asset.location,

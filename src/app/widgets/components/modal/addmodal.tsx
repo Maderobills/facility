@@ -27,7 +27,7 @@ interface ModalWidgetProps {
 
 const ModalWidget: React.FC<ModalWidgetProps> = ({ open, onClose, title, description }) => {
   function handleFormSubmit(formData: { [key: string]: string }): void {
-    // Implement form submission logic
+  
     console.log('Form data:', formData);
   }
 
